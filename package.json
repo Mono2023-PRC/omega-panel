@@ -1,0 +1,35 @@
+{
+	"name": "omega-control-panel",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"electron": "^22.1.0",
+		"electron-builder": "^23.6.0"
+	},
+	"build": {
+		"productName":"Omega控制面板",
+		"appId": "cn.kukinghan.omeegapanel",
+		"electronVersion": "4.1.4",
+		"publish": [{
+			"provider": "generic",
+			"url": "http://www.baidu.com/"
+		}],
+		"win": {
+			"target": "nsis",
+			"icon": "./icon.ico"
+		},
+		"nsis": {
+			"oneClick": false,
+			"allowElevation": true,
+			"allowToChangeInstallationDirectory": true,
+			"createDesktopShortcut": true
+		}
+	},
+	"scripts": {
+		"start": "electron .",
+		"dist-win": "electron-builder --win --ia32"
+	}
+}
