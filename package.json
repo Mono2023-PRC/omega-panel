@@ -1,8 +1,8 @@
 {
 	"name": "omega-control-panel",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "",
-	"main": "index.js",
+	"main": "main.js",
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
@@ -19,7 +19,7 @@
 		}],
 		"win": {
 			"target": "nsis",
-			"icon": "./icon.ico"
+			"icon": "./icon"
 		},
 		"nsis": {
 			"oneClick": false,

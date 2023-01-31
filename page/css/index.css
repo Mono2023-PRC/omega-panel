@@ -1,0 +1,52 @@
+#hellomg {
+	margin-top: 15%;
+	font-size: 5em;
+	text-align: center;
+	background-image: -webkit-linear-gradient(left, #1ebee5,  #3459fd , #1ebee5,  #3459fd, #1ebee5);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-background-size: 200% 100%;
+	-webkit-animation: masked-animation 2s infinite linear;
+}
+
+@-webkit-keyframes masked-animation {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -100% 0;
+	}
+}
+
+@keyframes zoom {
+	to {
+		margin-top: 10%;
+		font-size: 4em;
+	}
+}
+
+@keyframes show {
+	0%{
+		opacity :0
+	}
+	to {
+		opacity:100;
+	}
+}
+
+@keyframes hidden {
+	0%{
+		opacity :100
+	}
+	to {
+		opacity:0;
+	}
+}
+
+#form{
+	position: fixed;
+	top: 38%;
+	font-size: 2em;
+	width: 100%;
+	text-align: center;
+}
