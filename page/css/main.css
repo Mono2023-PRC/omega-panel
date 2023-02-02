@@ -27,6 +27,7 @@
 #main #menu #menu_title span{
 	position: relative;
 	top: -5px;
+	
 }
 
 
@@ -38,4 +39,15 @@
 #main #frame iframe{
 	width: 100%;
 	height: calc(99vh);
+}
+
+
+#title {
+	margin: 1% 0 0 1.5%;
+	font-size: 1.2em;
+	height: 40px;
+}
+
+#title_br {
+	margin-top: 5px;
 }

@@ -20,45 +20,51 @@
 					</div>
 					<el-menu default-active="1" class="el-menu-vertical-demo" background-color="#ffffff"
 						text-color="#303133" active-text-color="#409eff">
-						<el-menu-item index="1" @click="switchFrame('home')" disabled>
+						<el-menu-item index="1" @click="switchFrame('home','el-icon-house','主页')" >
 							<i class="el-icon-house"></i>
 							<span slot="title">主页</span>
 						</el-menu-item>
-						<el-menu-item index="2" @click="switchFrame('configEdit')" disabled>
+						<el-menu-item index="2" @click="switchFrame('configEdit','el-icon-edit-outline','组件配置')" >
 							<i class="el-icon-edit-outline" ></i>
 							<span slot="title">组件配置</span>
 						</el-menu-item>
-						<el-menu-item index="3" @click="switchFrame('commController')" disabled>
+						<el-menu-item index="3" @click="switchFrame('commController','el-icon-set-up','快捷控制')" >
 							<i class="el-icon-set-up"></i>
 							<span slot="title">快捷控制</span>
 						</el-menu-item>
-						<el-menu-item index="4" @click="switchFrame('omgResource')" disabled>
+						<el-menu-item index="4" @click="switchFrame('omgResource','el-icon-document','资源推荐')" >
 							<i class="el-icon-document"></i>
 							<span slot="title">资源推荐</span>
 						</el-menu-item>
-						<el-menu-item index="5" @click="switchFrame('tutorial')" disabled>
-							<i class="el-icon-discover"></i>
-							<span slot="title">使用教程</span>
-						</el-menu-item>
-						<el-menu-item index="6" @click="switchFrame('sideControl')" disabled>
+						<el-menu-item index="5" @click="switchFrame('sideControl','el-icon-s-operation','插件管理')" >
 							<i class="el-icon-s-operation"></i>
 							<span slot="title">插件管理</span>
 						</el-menu-item>
-						<el-menu-item index="7" @click="switchFrame('OmgController')" disabled>
-							<i class="el-icon-cpu"></i>
-							<span slot="title">接管Omega运行</span>
+						<el-menu-item index="6" @click="switchFrame('tutorial','el-icon-discover','OMG教程')">
+							<i class="el-icon-discover"></i>
+							<span slot="title">OMG教程</span>
 						</el-menu-item>
-						<el-menu-item index="8" @click="switchFrame('config')">
+						<el-menu-item index="7" @click="switchFrame('OmgController','el-icon-cpu','OMG控制台')" >
+							<i class="el-icon-cpu"></i>
+							<span slot="title">OMG控制台</span>
+						</el-menu-item>
+						<el-menu-item index="8" @click="switchFrame('config','el-icon-setting','设置')">
 							<i class="el-icon-setting"></i>
 							<span slot="title">设置</span>
 						</el-menu-item>
-						<el-menu-item index="9" @click="switchFrame('info')">
+						<el-menu-item index="9" @click="switchFrame('info','el-icon-menu','关于')">
 							<i class="el-icon-menu"></i>
 							<span slot="title">关于</span>
 						</el-menu-item>
 					</el-menu>
 				</div>
 				<div id="frame">
+					<div id="title">
+						<i id="title_ico" class="el-icon-house" style="color: darkgray;">
+							&nbsp;<span id="title_name">主页</span>
+						</i>
+					</div>
+					<el-divider id="title_br"></el-divider>
 					<iframe :src="frame" frameborder="0"></iframe>
 				</div>
 			</div>

@@ -13,18 +13,27 @@
 	</head>
 	<body style="user-select: none;">
 		<div id="app">
-			<div id="title">
-				<i class="el-icon-s-tools" style="color: darkgray;">设置</i>
-			</div>
-			<el-divider id="title_br"></el-divider>
 			<div id="main">
-				<div id="main_1_titlw"><span>设置omega文件路径</span></div>
-				<div id="main_1">
-					<div id="form_1">
-						<el-input v-model="input" placeholder="设置omega_storage目录" id="el-input_omgsrc"></el-input>
+				<!-- 文档主体从此处开始 -->
+				<div class="main_titlw">
+					<span>设置omega文件路径<span style="color: red"> 必填</span></span>
+				</div>
+				<div class="main_">
+					<div class="form_1">
+						<el-input v-model="inputOmegaStorage" placeholder="设置omega_storage目录" class="el-input_omgsrc"></el-input>
 					</div>
-					<div id="form_2">
-						<el-button type="primary" id="el-button_but" @click="save()">保存</el-button>
+					<div class="form_2">
+						<el-button type="primary" class="el-button_but" @click="save()">保存</el-button>
+					</div>
+				</div>
+				<br />
+				<div class="main_titlw"><span>设置 OmegaSide 通信地址</span></div>
+				<div class="main_">
+					<div class="form_1">
+						<el-input v-model="inputSidePath" placeholder="127.0.0.1:24011" class="el-input_omgsrc"></el-input>
+					</div>
+					<div class="form_2">
+						<el-button type="primary" class="el-button_but" @click="">保存</el-button>
 					</div>
 				</div>
 			</div>

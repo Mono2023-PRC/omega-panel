@@ -31,7 +31,7 @@ let trueNewUser = () => {
 			if (config.config) {
 				setTimeout(() => {
 					window.location = "./main.html"
-				}, 2300)
+				}, 1800)
 			} else {
 				helloConfig.innerText = "第一次进入，正在进入配置页面"
 				helloOmega.setAttribute("style", "-webkit-animation: zoom 1.5s forwards");

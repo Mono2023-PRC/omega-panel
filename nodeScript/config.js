@@ -1,26 +1,32 @@
 const fs = require('fs');
 
 onload = () => {
-	vue();
-
+	let thisVue = vue();
+	fs.readFile('./data/config.json', (err, data) => {
+		if (err !== null) {} else {
+			let config = JSON.parse(data.toString());
+			thisVue.$data.inputOmegaStorage = config.omega_storage;
+		};
+	});
 }
 
 var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			input: ''
+			inputOmegaStorage: '',
+			inputSidePath: ''
 		}
 	},
 	methods: {
 		// 保存路径
 		save() {
-			let pathEnd = this.input.substring((this.input.length - 13));
+			let pathEnd = this.inputOmegaStorage.substring((this.inputOmegaStorage.length - 13));
 			let result;
 			if (pathEnd == "omega_storage") {
 				(async () => {
 					await new Promise((val) => {
-						fs.stat(this.input, (err, data) => {
+						fs.stat(this.inputOmegaStorage, (err, data) => {
 							if (err) {
 								this.openErr("路径不存在omega_storage文件夹")
 							} else {
@@ -35,19 +41,27 @@ var vue = () => new Vue({
 					});
 					if (result) {
 						fs.readFile('./data/config.json', (err, data) => {
-							console.log(err);
 							if (err !== null) {
 								this.openErr("配置文件被删除！请重启软件");
 							} else {
+								let firstSave = true;
 								let config = JSON.parse(data.toString());
+								if (config.omega_storage != undefined) {
+									firstSave = false;
+								}
 								config.config = true;
-								config.omega_storage = this.input;
-								fs.writeFile("data/config.json", JSON.stringify(config, "","	"), (err, data) => {
+								config.omega_storage = this.inputOmegaStorage;
+								fs.writeFile("data/config.json", JSON.stringify(config, "",
+									"	"), (err, data) => {
 									if (err != null) {
 										this.openErr("未知错误：初始化设置失败！");
 									}
 								});
-								window.location = "../main.html"
+								if (firstSave) {
+									window.location = "../main.html"
+								} else {
+									this.openOk("保存成功");
+								}
 							};
 						});
 					};
@@ -63,6 +77,13 @@ var vue = () => new Vue({
 				message: msg,
 				type: 'warning'
 			})
-		}
+		},
+		// 成功弹窗
+		openOk(msg) {
+			this.$message({
+				message: msg,
+				type: 'success'
+			});
+		},
 	}
 })

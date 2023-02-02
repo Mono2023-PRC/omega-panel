@@ -11,7 +11,7 @@ app.on('ready', () => {
 		width: 1416,
 		height: 800,
 		resizable: false,
-		icon: "static/a.ico",
+		icon: "static/a.ico", 
 		webPreferences: {
 			devTools:true,//开启调试模式 Ctrl+Shift+i
 			nodeIntegration:true ,//允许渲染引擎使用完整node.js能力
