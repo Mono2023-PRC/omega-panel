@@ -8,13 +8,15 @@ app.on('ready', () => {
 	
 	// 创建窗口
 	win = new BrowserWindow({
-		width: 1100,
-		height: 650,
+		width: 1416,
+		height: 800,
 		resizable: false,
+		icon: "static/a.ico",
 		webPreferences: {
 			devTools:true,//开启调试模式 Ctrl+Shift+i
 			nodeIntegration:true ,//允许渲染引擎使用完整node.js能力
-			contextIsolation :false //禁用环境隔离
+			contextIsolation :false, //禁用环境隔离
+			nodeIntegrationInSubFrames :true
 		}
 	})
 	win.loadFile('page/index.html');

@@ -31,6 +31,11 @@
 
 
 #main #frame{
-	background-color: antiquewhite;
 	width: 100%;
+	box-shadow: -1px 0 #DCDFE6;
+}
+
+#main #frame iframe{
+	width: 100%;
+	height: calc(99vh);
 }

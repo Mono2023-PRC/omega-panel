@@ -11,5 +11,5 @@ var menuTemplate = [{
 ]
 
 //选项卡
-// menu.setApplicationMenu(null); 
+menu.setApplicationMenu(null); 
 // menu.setApplicationMenu(menu.buildFromTemplate(menuTemplate));

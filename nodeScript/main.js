@@ -6,15 +6,12 @@ var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			
+			frame : "frame/config.html"
 		}
 	},
 	methods: {
-		handleOpen(key, keyPath) {
-			console.log(key, keyPath);
-		},
-		handleClose(key, keyPath) {
-			console.log(key, keyPath);
+		switchFrame(name){
+			this.frame ="frame/"+name+".html"
 		}
 	}
 })
