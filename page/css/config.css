@@ -1,0 +1,34 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+#title{
+	margin: 1% 0 0 1.5%;
+	font-size: 1.2em;
+}
+#title_br{
+	margin-top: 5px;
+}
+#main{
+	width: 80%;
+	margin: 0 auto;
+}
+#main_1_titlw{
+	padding-bottom: 1%;
+}
+
+/* 设置omega文件路径 */
+#main_1{
+	display: flex;
+}
+/* 设置路径输入框 */
+#form_1{
+	display: block;
+	width: 78%;
+}
+/* 设置路径保存按钮 */
+#form_2{
+	margin-left: 2%;
+	display: block;
+	width: 20%;
+}

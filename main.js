@@ -20,7 +20,7 @@ app.on('ready', () => {
 	win.loadFile('page/index.html');
 	
 	// 调试模式开启时同时打开控制台
-	// win.webContents.openDevTools();//打开控制台
+	win.webContents.openDevTools();//打开控制台
 	
 	// 窗口关闭销毁页面
 	win.on('close', () => {

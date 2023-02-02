@@ -10,7 +10,7 @@
 		"electron-builder": "^23.6.0"
 	},
 	"build": {
-		"productName":"Omega控制面板",
+		"productName":"Omega管理面板",
 		"appId": "cn.kukinghan.omeegapanel",
 		"electronVersion": "4.1.4",
 		"publish": [{

@@ -3,30 +3,34 @@
 	<head>
 		<meta charset="utf-8">
 		<title>设置</title>
-		<script src="../static/vue.js"></script>
-		<!-- <script src="../static/vue.min.js"></script> -->
-		<link rel="stylesheet" href="../static/ele.css">
-		<script src="../static/ele.js"></script>
-		<link rel="icon" href="../static/a.ico">
+		<script src="../static/vue.min.js"></script>
+		<link rel="stylesheet" href="../static/element/element.css">
+		<script src="../static/element/element.js"></script>
+
+		<link rel="stylesheet" href="css/config.css">
+		<script src="../nodeScript/config.js"></script>
+
 	</head>
 	<body>
 		<div id="app">
-			<div id="form_1">
-				<el-input v-model="input" placeholder="设置omega_storage目录" id="el-input_omgsrc"></el-input>
+			<div id="title">
+				<i class="el-icon-s-home">主页</i>
+				<el-divider direction="vertical"></el-divider>
+				<i class="el-icon-s-tools" style="color: darkgray;">设置</i>
 			</div>
-			<div id="form_2">
-				<el-button type="primary" id="el-button_but">保存</el-button>
+			<el-divider id="title_br"></el-divider>
+			<div id="main">
+				<div id="main_1_titlw"><span>设置omega文件路径</span></div>
+				<div id="main_1">
+					<div id="form_1">
+						<el-input v-model="input" placeholder="设置omega_storage目录" id="el-input_omgsrc"></el-input>
+					</div>
+					<div id="form_2">
+						<el-button type="primary" id="el-button_but" @click="save()">保存</el-button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
-	<script>
-		new Vue({
-			el: '#app',
-			data: function() {
-				return {
-					input: ''
-				}
-			}
-		})
-	</script>
+
 </html>
