@@ -30,10 +30,9 @@ let trueNewUser = () => {
 			let config = JSON.parse(data.toString());
 			if (config.config) {
 				setTimeout(() => {
-					window.location = "main.html"
+					window.location = "./main.html"
 				}, 2300)
 			} else {
-
 				helloConfig.innerText = "第一次进入，正在进入配置页面"
 				helloOmega.setAttribute("style", "-webkit-animation: zoom 1.5s forwards");
 				helloConfig.setAttribute("style", "-webkit-animation: show 1.5s forwards");
@@ -42,7 +41,7 @@ let trueNewUser = () => {
 						index_main.setAttribute("style",
 							"-webkit-animation: hidden 0.3s forwards");
 						setTimeout(() => {
-							window.location = "config.html"
+							window.location = "./frame/config.html"
 						}, 300);
 					}, 300)
 				}, 1800)

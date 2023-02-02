@@ -1,0 +1,36 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+#main{
+	display: flex;
+	height: calc(100vh);
+}
+
+#main #menu{
+	width: 23%;
+}
+
+#main #menu #menu_title{
+	margin: 0 auto;
+	padding: 15px 0 15px 0;
+	color: #3688da;
+	text-align: center;
+	text-shadow: 1px 1px darkgray;
+	font-size: 1.2em;
+}
+
+#main #menu #menu_title #menu_title-ico{
+	width: 1.3em;
+}
+
+#main #menu #menu_title span{
+	position: relative;
+	top: -5px;
+}
+
+
+#main #frame{
+	background-color: antiquewhite;
+	width: 100%;
+}

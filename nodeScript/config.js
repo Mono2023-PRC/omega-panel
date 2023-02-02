@@ -47,7 +47,7 @@ var vue = () => new Vue({
 										this.openErr("未知错误：初始化设置失败！");
 									}
 								});
-								window.location = "main.html"
+								window.location = "../main.html"
 							};
 						});
 					};
