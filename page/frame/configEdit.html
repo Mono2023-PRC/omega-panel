@@ -6,7 +6,7 @@
 		<script src="../../static/vue.min.js"></script>
 		<link rel="stylesheet" href="../../static/element/element.css">
 		<script src="../../static/element/element.js"></script>
-		
+
 		<link rel="stylesheet" href="../css/configEdit.css">
 		<script src="../../nodeScript/configEdit.js"></script>
 	</head>
@@ -14,6 +14,35 @@
 		<div id="app">
 			<div id="main">
 				<!-- 文档主体从此处开始 -->
+				<div id="search">
+					<div>
+						<el-input v-model="search" placeholder="输入名称进行筛选" @input.native='searchConfig'></el-input>
+					</div>
+					<div>
+						<el-button plain icon="el-icon-close" @click='searchClear'>清空</el-button>
+					</div>
+				</div>
+				<el-table :data="tableData" height="635" style="width: 100%;" stripe>
+					<el-table-column label="文件" width='800'>
+						<template slot-scope="scope">
+							<ul>
+								<li class="search_name">{{ scope.row.name }}</li>
+								<li class="search_path">{{ scope.row.pathSrc }}</li>
+							</ul>
+						</template>
+					</el-table-column>
+					<el-table-column label="控制">
+						<template class="table_scope" slot-scope="scope">
+							<div class="table_scope_" @click="scopeSwitch(scope.row.name,scope.row.pathSrc)">
+								<el-switch active-text="启用" inactive-text="禁用" :value="!(scope.row.verboten)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+							</div>
+							<el-divider direction="vertical"  class="table_scope_"></el-divider>
+							<div class=" table_scope_">
+								<i class="el-icon-edit" >编辑</i>
+							</div>
+						</template>
+					</el-table-column>
+				</el-table>
 			</div>
 		</div>
 	</body>

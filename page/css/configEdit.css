@@ -1,4 +1,38 @@
-#main{
-	width: 85%;
-	margin: 0 auto;
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#search{
+	height: 60px;
+}
+
+#search>:first-child{
+	display: inline-block;
+	float: left;
+	width: 90%;
+	margin: 15px 0 5px 10px;
+}
+#search>:last-child {
+	display: inline-block;
+	float: right;
+	margin: 15px 15px 5px 0;
+	width: 7%;
+}
+
+.search_name{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.search_path{
+	font-size: 0.95em;
+	color: darkgray;
+}
+
+.table_scope{
+	display: flex;
+}
+
+.table_scope_{
+	display: inline-block;
 }

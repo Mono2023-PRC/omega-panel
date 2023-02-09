@@ -14,13 +14,13 @@
 
 /* 输入框 */
 .form_1 {
-	display: block;
+	display: inline-block;
 	width: 78%;
 }
 
 /* 按钮 */
 .form_2 {
 	margin-left: 2%;
-	display: block;
+	display: inline-block;
 	width: 20%;
 }

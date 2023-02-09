@@ -7,17 +7,20 @@ var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			frame : "frame/home.html"
+			frame: "frame/home.html"
 		}
 	},
 	methods: {
-		switchFrame(frame,ico,name){
-			this.frame ="frame/"+frame+".html";
-			document.getElementById("title_ico").className = ico;
-			document.getElementById("title_name").innerText = name;
+		switchFrame(frame, ico, name) {
+			switch (name) {
+				// case '组件配置': 
+				// 	console.log("组件配置");
+				default:
+					this.frame = "frame/" + frame + ".html";
+					document.getElementById("title_ico").className = ico;
+					document.getElementById("title_name").innerText = name;
+					break;
+			}
 		}
 	}
 })
-
-
-	

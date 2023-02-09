@@ -84,6 +84,6 @@ var vue = () => new Vue({
 				message: msg,
 				type: 'success'
 			});
-		},
+		}
 	}
 })
