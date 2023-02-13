@@ -3,7 +3,15 @@ const path = require("path");
 var rootPath;
 var fillArr = []; //配置列表
 
+//编辑器配置
+let options1 = {
+	"mode": "code"
+};
+let options2 = {};
+var editor1; //文编辑器
+var editor2; //设置编辑器
 
+// 读取配置
 fs.readFile('./data/config.json', 'utf8', (err, data) => {
 	if (err !== null) {} else {
 		let config = JSON.parse(data.toString());
@@ -25,7 +33,7 @@ function readDirSync(Path) {
 				let a = JSON.parse(data);
 				let file = path.basename(ele, '.json');
 				let ban = a.是否禁用;
-				let src = Path +'\\'+ ele;
+				let src = Path + '\\' + ele;
 				fillArr.push({
 					name: file,
 					pathSrc: src,
@@ -37,8 +45,6 @@ function readDirSync(Path) {
 }
 
 
-
-
 onload = () => {
 	let thisVue = vue();
 	thisVue.loadConfig();
@@ -48,17 +54,41 @@ var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			tableData: [],
-			search: ''
+			tableData: [], //文件列表
+			search: '', //搜索框
+			// 弹出窗口
+			jsonEdit1: {
+				elframe: false, //编辑器窗口
+				title: '', //编辑器标题
+				src: '', //文件路径
+				json: {} //Json文本
+			},
+			jsonEdit2: {
+				elframe: false,
+				title: '',
+				src: '',
+				json: {}
+			}
 		}
 	},
 	methods: {
+		// 提示
 		openErr(msg) {
 			this.$message({
 				message: msg,
 				type: 'warning'
 			})
 		},
+		openOk(msg) {
+			this.$message({
+				message: msg,
+				type: 'success'
+			});
+		},
+		openError(msg) {
+		        this.$message.error(msg);
+		},
+		// 加载配置
 		loadConfig() {
 			let fillArrIsUndefined = true;
 			(async () => {
@@ -110,9 +140,6 @@ var vue = () => new Vue({
 			this.search = '';
 			this.searchConfig();
 		},
-		getSwitchVal(a) {
-			return true
-		},
 		// 切换开关状态,修改文件
 		scopeSwitch(name, url) {
 			// 切换配置状态
@@ -123,15 +150,93 @@ var vue = () => new Vue({
 				fs.readFile(path.join(url), 'utf8', (err, data) => {
 					let a = JSON.parse(data);
 					a.是否禁用 = !a.是否禁用;
-					let b = JSON.stringify(a,"","	");
-					fs.writeFile(path.join(url),b,(err)=>{})
+					let b = JSON.stringify(a, "", "	");
+					fs.writeFile(path.join(url), b, (err) => {})
 				});
-				this.tableData.forEach((index)=>{
+				this.tableData.forEach((index) => {
 					if (index.name == name) {
 						index.verboten = !index.verboten
 					}
 				})
 			}
+		},
+		// 编辑器
+		configEdit1(src, name) {
+			this.jsonEdit1.title = name;
+			this.jsonEdit1.src = src;
+			let json;
+			(async () => {
+				await new Promise(function(ok) {
+					fs.readFile(src, 'utf8', (err, data) => {
+						json = data;
+						ok();
+					})
+				})
+				this.jsonEdit1.json = JSON.parse(json);
+				this.jsonEdit1.elframe = true;
+				setTimeout(() => {
+					this.editFrame1(JSON.parse(json));
+				}, 50)
+			})();
+		},
+		configEdit2(src, name) {
+			this.jsonEdit2.title = name;
+			this.jsonEdit2.src = src;
+			let json;
+			(async () => {
+				await new Promise(function(ok) {
+					fs.readFile(src, 'utf8', (err, data) => {
+						json = data;
+						ok();
+					})
+				})
+				this.jsonEdit2.json = JSON.parse(json);
+				this.jsonEdit2.elframe = true;
+				setTimeout(() => {
+					this.editFrame2(JSON.parse(json));
+				}, 50)
+			})();
+		},
+		editFrame1(json) {
+			let container = document.getElementById("jsoneditor1");
+			editor1 = new JSONEditor(container, options1)
+			editor1.set(json)
+		},
+		editFrame2(json) {
+			let container = document.getElementById("jsoneditor2");
+			editor2 = new JSONEditor(container, options2)
+			editor2.set(json)
+		},
+		handleClose(done) {
+			this.$confirm('确认关闭？')
+				.then(_ => {
+					done();
+				})
+				.catch(_ => {});
+		},
+		configSave(val) {
+			try{
+				if (val == 1) {
+					let src = this.jsonEdit1.src;
+					let str = JSON.stringify(editor1.get(), '', '	');
+					fs.writeFile(src, str, (err) => {
+						this.openOk('保存成功');
+					});
+				} else if (val == 2) {
+					let src = this.jsonEdit2.src;
+					let str = JSON.stringify(editor2.get(), '', '	');
+					fs.writeFile(src, str, (err) => {
+						this.openOk('保存成功');
+					});
+				}
+			}catch(e){
+				this.openErr('json存在语法错误，保存被');
+				setTimeout(()=>{
+					this.openError(e);
+				},10)
+			}
+			
 		}
+		// 编辑器END
 	}
 })

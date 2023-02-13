@@ -30,9 +30,35 @@
 }
 
 .table_scope{
-	display: flex;
-}
-
-.table_scope_{
 	display: inline-block;
 }
+
+/* elm弹出标题 */
+	.el-dialog__header{
+		padding: 10px;
+	}
+	.el-dialog__title{
+		color: darkgray;
+	}
+	.el-dialog__body{
+		padding: 0;
+	}
+/* elm弹出标题END */
+/* jsonEdit */
+.jsoneditor-sort,.jsoneditor-transform,.jsoneditor-repair{
+	/* 隐藏排序，隐藏筛选，隐藏修复 */
+	display: none;
+}
+.jsonEditSave{
+	padding: 0;
+	width: 55px;
+	height: 30px;
+	position:fixed ;
+	top: 12px;
+	right: 50px;
+	left: 1040px;
+	color: #409EFF;
+	border-color: #67C23A;
+	
+}
+/* jsonEdit-END */

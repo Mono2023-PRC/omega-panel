@@ -6,14 +6,17 @@
 		<script src="../../static/vue.min.js"></script>
 		<link rel="stylesheet" href="../../static/element/element.css">
 		<script src="../../static/element/element.js"></script>
-
+		<!-- JsonEdit -->
+		<link rel="stylesheet" href="../../static/jsoneditor/jsoneditor.css">
+		<script src="../../static/jsoneditor/jsoneditor.js"></script>
+	
 		<link rel="stylesheet" href="../css/configEdit.css">
 		<script src="../../nodeScript/configEdit.js"></script>
 	</head>
 	<body style="user-select: none;">
 		<div id="app">
 			<div id="main">
-				<!-- 文档主体从此处开始 -->
+				<!-- 搜索筛选 -->
 				<div id="search">
 					<div>
 						<el-input v-model="search" placeholder="输入名称进行筛选" @input.native='searchConfig'></el-input>
@@ -22,6 +25,7 @@
 						<el-button plain icon="el-icon-close" @click='searchClear'>清空</el-button>
 					</div>
 				</div>
+				<!-- 文件列表 -->
 				<el-table :data="tableData" height="635" style="width: 100%;" stripe>
 					<el-table-column label="文件" width='800'>
 						<template slot-scope="scope">
@@ -32,17 +36,30 @@
 						</template>
 					</el-table-column>
 					<el-table-column label="控制">
-						<template class="table_scope" slot-scope="scope">
-							<div class="table_scope_" @click="scopeSwitch(scope.row.name,scope.row.pathSrc)">
+						<template slot-scope="scope">
+							<div class="table_scope" @click="scopeSwitch(scope.row.name,scope.row.pathSrc)">
 								<el-switch active-text="启用" inactive-text="禁用" :value="!(scope.row.verboten)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
 							</div>
-							<el-divider direction="vertical"  class="table_scope_"></el-divider>
-							<div class=" table_scope_">
-								<i class="el-icon-edit" >编辑</i>
+							<el-divider direction="vertical"  class="table_scope"></el-divider>
+							<div class=" table_scope">
+								<i class="el-icon-edit" @click="configEdit1(scope.row.pathSrc,scope.row.name)">编辑</i>
+							</div>
+							<el-divider direction="vertical"  class="table_scope"></el-divider>
+							<div class=" table_scope">
+								<i class="el-icon-setting" @click="configEdit2(scope.row.pathSrc,scope.row.name)"></i>
 							</div>
 						</template>
 					</el-table-column>
 				</el-table>
+				<!-- 代码编辑器 -->
+				<el-dialog destroy-on-close="true":title="jsonEdit1.title" :visible.sync="jsonEdit1.elframe" fullscreen="true" :before-close="handleClose">
+					<div id="jsoneditor1" style="width: 100%; height: 652px;"></div>
+					<el-button @click="configSave(1)" class="jsonEditSave el-icon-folder" plain> 保存</el-button>
+				</el-dialog>
+				<el-dialog destroy-on-close="true" :title="jsonEdit2.title" :visible.sync="jsonEdit2.elframe" fullscreen="true" :before-close="handleClose">
+					<div id="jsoneditor2" style="width: 100%; height: 652px;"></div>
+					<el-button @click="configSave(2)" class="jsonEditSave el-icon-folder" plain> 保存</el-button>
+				</el-dialog>
 			</div>
 		</div>
 	</body>

@@ -682,7 +682,7 @@ var ErrorTable = /*#__PURE__*/function () {
           trEl.appendChild(td1);
           var td2 = document.createElement('td');
           td2.style = 'white-space: nowrap;';
-          td2.textContent = !isNaN(line) ? 'Ln ' + line : '';
+          td2.textContent = !isNaN(line) ? '行数 ' + line : '';
           trEl.appendChild(td2);
 
           if (typeof error === 'string') {
@@ -2047,11 +2047,11 @@ var jsonlint = function () {
             var errStr = '';
 
             if (this.lexer.showPosition) {
-              errStr = 'Parse error on line ' + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\nExpecting " + expected.join(', ') + ", got '" + this.terminals_[symbol] + "'";
+              errStr = '发现错误在行：' + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\n应该为 " + expected.join(', ') + "格式, 但是发现了 '" + this.terminals_[symbol] + "'";
             } else {
-              errStr = 'Parse error on line ' + (yylineno + 1) + ": Unexpected " + (symbol == 1
+              errStr = '发现错误在行：' + (yylineno + 1) + ": 意外的错误 " + (symbol == 1
               /*EOF*/
-              ? "end of input" : "'" + (this.terminals_[symbol] || symbol) + "'");
+              ? "输入结束" : "'" + (this.terminals_[symbol] || symbol) + "'");
             }
 
             this.parseError(errStr, {
