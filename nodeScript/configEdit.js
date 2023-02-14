@@ -1,3 +1,4 @@
+const require = parent.window.require;
 const fs = require("fs");
 const path = require("path");
 var rootPath;

@@ -14,15 +14,16 @@ app.on('ready', () => {
 		icon: "static/a.ico", 
 		webPreferences: {
 			devTools:true,//开启调试模式 Ctrl+Shift+i
-			nodeIntegration:true ,//允许渲染引擎使用完整node.js能力
+			nodeIntegration:true,//允许渲染引擎使用完整node.js能力
 			contextIsolation :false, //禁用环境隔离
-			nodeIntegrationInSubFrames :true
+			enableRemoteModule: true, //启用require
+			nodeIntegrationInSubFrames :true //开放子页面权限
 		}
 	})
 	win.loadFile('page/index.html');
 	
 	// 调试模式开启时同时打开控制台
-	win.webContents.openDevTools();//打开控制台
+	// win.webContents.openDevTools();//打开控制台
 	
 	// 窗口关闭销毁页面
 	win.on('close', () => {
