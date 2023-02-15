@@ -1,4 +1,5 @@
 {
-	"config":false,
-	"omega_storage":null
+	"config": false,
+	"omega_storage": null,
+	"omega_side": "127.0.0.1:24011"
 }

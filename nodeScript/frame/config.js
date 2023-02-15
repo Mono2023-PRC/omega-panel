@@ -6,8 +6,11 @@ onload = () => {
 	fs.readFile('./data/config.json', (err, data) => {
 		if (err !== null) {} else {
 			let config = JSON.parse(data.toString());
+			
 			thisVue.$data.inputOmegaStorage = config.omega_storage;
-		};
+			thisVue.$data.inputSidePath = config.omega_side;
+			
+		}; 
 	});
 }
 
@@ -21,7 +24,7 @@ var vue = () => new Vue({
 	},
 	methods: {
 		// 保存路径
-		save() {
+		saveStorage() {
 			let pathEnd = this.inputOmegaStorage.substring((this.inputOmegaStorage.length - 13));
 			let result;
 			if (pathEnd == "omega_storage") {
@@ -42,7 +45,7 @@ var vue = () => new Vue({
 					});
 					if (result) {
 						fs.readFile('./data/config.json', (err, data) => {
-							if (err !== null) {
+							if (err != null) {
 								this.openErr("配置文件被删除！请重启软件");
 							} else {
 								let firstSave = true;
@@ -71,6 +74,35 @@ var vue = () => new Vue({
 			} else {
 				this.openErr("路径未包含omega_storage")
 			}
+		},
+		// 保存side地址
+		saveSide(){
+			let path = this.inputSidePath;
+			if (path == "") {
+				this.openErr("地址不能为空");
+			} else{
+				fs.readFile('./data/config.json', (err, data) => {
+					if (err != null) {
+						this.openErr("配置文件被删除！请重启软件");
+					} else {
+						let firstSave = true;
+						let config = JSON.parse(data.toString());
+						if (config.omega_storage != undefined) {
+							firstSave = false;
+						}
+						config.omega_side = path;
+						fs.writeFile("data/config.json", JSON.stringify(config, "",
+							"	"), (err, data) => {
+							if (err != null) {
+								this.openErr("未知错误：初始化设置失败！");
+							}else{
+								this.openOk("保存成功");
+								parent.socketClose();
+							}
+						});
+					};
+				});
+			};
 		},
 		// 提示弹窗
 		openErr(msg) {

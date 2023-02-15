@@ -8,7 +8,7 @@
 		<script src="../../static/element/element.js"></script>
 
 		<link rel="stylesheet" href="../css/config.css">
-		<script src="../../nodeScript/config.js"></script>
+		<script src="../../nodeScript/frame/config.js"></script>
 
 	</head>
 	<body style="user-select: none;">
@@ -23,7 +23,7 @@
 						<el-input v-model="inputOmegaStorage" placeholder="设置omega_storage目录" class="el-input_omgsrc"></el-input>
 					</div>
 					<div class="form_2">
-						<el-button type="primary" class="el-button_but" @click="save()">保存</el-button>
+						<el-button type="primary" class="el-button_but" @click="saveStorage()">保存</el-button>
 					</div>
 				</div>
 				<br />
@@ -33,7 +33,7 @@
 						<el-input v-model="inputSidePath" placeholder="127.0.0.1:24011" class="el-input_omgsrc"></el-input>
 					</div>
 					<div class="form_2">
-						<el-button type="primary" class="el-button_but" @click="">保存</el-button>
+						<el-button type="primary" class="el-button_but" @click="saveSide()">保存</el-button>
 					</div>
 				</div>
 			</div>

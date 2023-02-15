@@ -1,6 +1,9 @@
+const fs = require("fs");
+
 window.onload = () => {
 	vue()
-
+	setSocket();
+	
 }
 
 var vue = () => new Vue({

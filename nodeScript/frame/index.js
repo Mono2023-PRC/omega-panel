@@ -17,12 +17,23 @@ let trueNewUser = () => {
 		if (err !== null) {
 			console.log("无文件");
 			fs.mkdir("data", (err) => {})
-			fs.writeFile("data/config.json", "{\"config\":false}", (err, data) => {
+			
+			let data = `
+				{
+					"config": false,
+					"omega_storage": null,
+					"omega_side": "127.0.0.1:24011"
+				}
+			`
+			fs.writeFile("data/config.json", data,(err) => {
 				if (err != null) {
-					alert("未知错误：初始化设置失败！");
+					alert(err);
 				}
 			});
-			trueNewUser();
+			
+			setTimeout(()=>{
+				trueNewUser();
+			},200)
 			
 		// 文件读取成功
 		// 热知识:readFile读整个文件,不需要关闭资源

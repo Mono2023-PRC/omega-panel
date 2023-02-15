@@ -215,14 +215,18 @@ var vue = () => new Vue({
 				})
 				.catch(_ => {});
 		},
+		// 保存配置文件
 		configSave(val) {
+			console.log(this.jsonEdit1.src);
 			try{
+				// 代码模式
 				if (val == 1) {
 					let src = this.jsonEdit1.src;
 					let str = JSON.stringify(editor1.get(), '', '	');
 					fs.writeFile(src, str, (err) => {
 						this.openOk('保存成功');
 					});
+				// 设置 模式
 				} else if (val == 2) {
 					let src = this.jsonEdit2.src;
 					let str = JSON.stringify(editor2.get(), '', '	');
@@ -230,13 +234,19 @@ var vue = () => new Vue({
 						this.openOk('保存成功');
 					});
 				}
+				// 刷新按钮
+				setTimeout(()=>{
+					// 先用上面的逻辑遍历,哪天想起来再做这个功能
+					// console.log(this.jsonEdit1.title);
+					// console.log(this.jsonEdit2.title);
+					// 拿到名字=name,重读文件,拿到值,修改tableDatad的verboten,重写按钮，
+				})
 			}catch(e){
 				this.openErr('json存在语法错误，保存被');
 				setTimeout(()=>{
 					this.openError(e);
 				},10)
 			}
-			
 		}
 		// 编辑器END
 	}
