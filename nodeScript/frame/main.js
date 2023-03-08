@@ -1,4 +1,5 @@
 const fs = require("fs");
+const {shell} = require('electron');
 
 window.onload = () => {
 	vue()
@@ -10,7 +11,8 @@ var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			frame: "frame/home.html"
+			frame: "frame/home.html",
+			infoAlert : false
 		}
 	},
 	methods: {
@@ -24,6 +26,9 @@ var vue = () => new Vue({
 					document.getElementById("title_name").innerText = name;
 					break;
 			}
+		},
+		openExternal(url){
+			shell.openExternal(url)
 		}
 	}
 })

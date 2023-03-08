@@ -1,4 +1,41 @@
 #main{
-	width: 85%;
+	width: 90%;
 	margin: 0 auto;
+}
+
+.resource {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+.resource .box{
+	width: 30%;
+	height: 300px;
+	margin: 1.5%;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+
+.resource .box:hover{
+	background-color: #f1f1f1;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), 0 0 6px rgba(0, 0, 0, 0.3)
+}
+.resource .box span:first-child{
+	font-size: 1.5em;
+	display: block;
+	text-align: center;
+	margin: 3px 0 10px 0;
+	color: #303030;
+}
+.resource .box span:last-child{
+	display: inline-block;
+	margin: 15px;
+	font-size: 0.8em;
+	color: #4f4f4f;
+}
+.resource .box img{
+	width: 84%;
+	height: 90px;
+	margin-left: 8%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 6px rgba(0, 0, 0, 0.3)
 }

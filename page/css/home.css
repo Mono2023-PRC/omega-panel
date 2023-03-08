@@ -2,3 +2,40 @@
 	width: 85%;
 	margin: 0 auto;
 }
+
+/* 标题 */
+#menu_title{
+	margin: 15px;
+	color: #3688da;
+	font-size: 2em;
+	text-align: center;
+}
+#menu_title #menu_title-ico {
+	width: 2em;
+}
+#menu_title span {
+	position: relative;
+	top: -0.5em;
+	text-shadow: 1px 1px darkgray;
+}
+#hellomg {
+	margin-left: 5%;
+	display: inline-block;
+	background-image: -webkit-linear-gradient(left, #1ebee5,  #3459fd , #1ebee5,  #3459fd, #1ebee5);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-background-size: 200% 100%;
+	-webkit-animation: masked-animation 2s infinite linear;
+	font-size: 1.5em;
+	position: relative;
+	top: -0.2em;
+}
+@-webkit-keyframes masked-animation {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -100% 0;
+	}
+}
+/* 标题END */

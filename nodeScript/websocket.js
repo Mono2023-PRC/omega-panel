@@ -2,11 +2,12 @@
 var msgID = 0; //请求序号
 var socket; //WebSocket
 var omgData; //omg返回内容
+var omegaSideConnect = false;
 
 var setSocket = () => {
 	let sideColor = document.getElementsByClassName("side_")[0];
 	let sideinfo = document.getElementsByClassName("side_state")[0];
-	sideColor.style.backgroundColor = "orange";
+	sideColor.className = "el-icon-loading";
 	sideinfo.innerHTML = "连接"
 
 	let path;
@@ -19,8 +20,10 @@ var setSocket = () => {
 			socket.addEventListener('open', function() {
 				// 打开websocket连接
 				sideColor.style.backgroundColor = "green";
+				sideColor.className = "side_";
 				sideinfo.innerHTML = "在线"
-				console.log(socket);
+				omegaSideConnect = true;
+				
 			});
 			//接收websocket服务的数据
 			socket.addEventListener('message', function(e) {
@@ -31,9 +34,10 @@ var setSocket = () => {
 
 			});
 			socket.addEventListener('close', function() {
-				console.log(socket + "断开连接");
 				sideColor.style.backgroundColor = "red";
+				sideColor.className = "side_";
 				sideinfo.innerHTML = "离线"
+				omegaSideConnect = false;
 			});
 
 		};

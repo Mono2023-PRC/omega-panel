@@ -12,6 +12,7 @@
 	width: 23%;
 }
 
+/* 当前选项标题 */
 #menu #menu_title {
 	margin: 0 auto;
 	padding: 15px 0 15px 0;
@@ -30,7 +31,9 @@
 	top: -5px;
 }
 
+/* 当前选项标题  END*/
 
+/* 子页 */
 #frame {
 	width: 100%;
 	box-shadow: -1px 0 #DCDFE6;
@@ -52,7 +55,10 @@
 	padding: 1% 0 0.5% 1.5%;
 }
 
-#side{
+/* 子页  END*/
+
+/* side状态 */
+#side {
 	margin: 145px 0 0 25px;
 	color: darkgray;
 	font-size: 1em;
@@ -64,3 +70,20 @@
 	display: inline-block;
 	border-radius: 6px;
 }
+
+/* side状态 END */
+
+/* 关于窗口 */
+#info .el-dialog__wrapper .el-dialog .el-dialog__body{
+	overflow: hidden;
+}
+#info .el-dialog__wrapper .el-dialog .el-dialog__body div{
+	margin: 15px;
+}
+#info .el-dialog__wrapper .el-dialog .el-dialog__body .butt{
+	float: right;
+}
+.info_jsonedit{
+	color: #0055ff;
+}
+/* 关于窗口 END */

@@ -242,7 +242,7 @@ var vue = () => new Vue({
 					// 拿到名字=name,重读文件,拿到值,修改tableDatad的verboten,重写按钮，
 				})
 			}catch(e){
-				this.openErr('json存在语法错误，保存被');
+				this.openErr('json存在语法错误，保存失败');
 				setTimeout(()=>{
 					this.openError(e);
 				},10)

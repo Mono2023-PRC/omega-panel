@@ -8,7 +8,9 @@
 > ## 与Omega通信的外部工具
 
 ## 使用方法
+下载经过编译的发行版本安装包，双击exe点击下一步进行快速安装	
 
+或下载解压版，双击exe启动
 
 ## 开发环境
 1. 安装[Node.js](https://nodejs.org/zh-cn/)
@@ -18,7 +20,7 @@
 ```	powershell
 	npm install electron --save-dev
 ```
-- 安装electron-builder(建议使用yarn包管理器)
+- 安装electron-builder(推荐使用yarn包管理器)
 ```	powershell
 	npm install electron-builder --save-dev
 ```

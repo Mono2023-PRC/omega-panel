@@ -29,7 +29,7 @@
 							<i class="el-icon-edit-outline"></i>
 							<span slot="title">组件配置</span>
 						</el-menu-item>
-						<el-menu-item index="3" @click="switchFrame('commController','el-icon-set-up','快捷控制')">
+						<el-menu-item index="3" @click="switchFrame('commController','el-icon-set-up','快捷控制')" disabled>
 							<i class="el-icon-set-up"></i>
 							<span slot="title">快捷控制</span>
 						</el-menu-item>
@@ -37,15 +37,15 @@
 							<i class="el-icon-document"></i>
 							<span slot="title">资源推荐</span>
 						</el-menu-item>
-						<el-menu-item index="5" @click="switchFrame('sideControl','el-icon-s-operation','插件管理')">
+						<el-menu-item index="5" @click="switchFrame('sideControl','el-icon-s-operation','插件管理')" disabled>
 							<i class="el-icon-s-operation"></i>
 							<span slot="title">插件管理</span>
 						</el-menu-item>
-						<el-menu-item index="6" @click="switchFrame('tutorial','el-icon-discover','OMG教程')">
+						<el-menu-item index="6" @click="switchFrame('tutorial','el-icon-discover','OMG教程')" disabled>
 							<i class="el-icon-discover"></i>
 							<span slot="title">OMG教程</span>
 						</el-menu-item>
-						<el-menu-item index="7" @click="switchFrame('OmgController','el-icon-cpu','OMG控制台')">
+						<el-menu-item index="7" @click="switchFrame('OmgController','el-icon-cpu','OMG控制台')" disabled>
 							<i class="el-icon-cpu"></i>
 							<span slot="title">OMG控制台</span>
 						</el-menu-item>
@@ -53,13 +53,13 @@
 							<i class="el-icon-setting"></i>
 							<span slot="title">设置</span>
 						</el-menu-item>
-						<el-menu-item index="9" @click="switchFrame('info','el-icon-menu','关于')">
+						<el-menu-item index="9" @click="infoAlert = true">
 							<i class="el-icon-menu"></i>
 							<span slot="title">关于</span>
 						</el-menu-item>
 					</el-menu>
 					<div id="side">
-						<span>旁加载系统</span>
+						<span>旁加载系统 </span>
 						<div class="side_"> </div>
 						<span class="side_state"></span>
 					</div>
@@ -73,6 +73,25 @@
 					<el-divider id="title_br"></el-divider>
 					<iframe :src="frame" frameborder="0"></iframe>
 				</div>
+			</div>
+			
+			<!-- info -->
+			<div id="info">
+				<el-dialog title="软件信息" :visible.sync="infoAlert" width="50%">
+					<div>
+						<span>项目开源地址：</span>
+						<el-button plain @click="openExternal('https://gitee.com/kukinghan/omega-panel')">Gitee</el-button>
+						<el-button plain @click="openExternal('https://github.com/kukinghan/omega-panel')">GitHub</el-button>
+					</div>
+					<div>
+						<span>开源授权许可：</span>
+						<span class="info_jsonedit" @click="openExternal('https://github.com/josdejong/jsoneditor/blob/develop/LICENSE')">jsoneditor</span>
+					</div>
+					<div>copyright © kukinghan</div>
+					<div class="butt">
+						<el-button type="primary" @click="infoAlert = false">确 定</el-button>
+					</div>
+				</el-dialog>
 			</div>
 		</div>
 
