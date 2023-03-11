@@ -2,3 +2,30 @@
 	width: 85%;
 	margin: 0 auto;
 }
+
+/* 执行omega函数 */
+#msgFunctionInput{
+	display: flex;
+}
+
+/* 执行命令 */
+#command table tr:first-child td:nth-child(2){
+	display: flex;
+}
+#command table .text{
+	text-align: justify;
+	text-align-last: justify;
+}
+/* 执行命令END */
+
+/* 世界控制 */
+#worldConfig div:first-child .el-slider{
+	display: inline-block;
+	width: 70%;
+	margin-left: 10px;
+	position: relative;
+	top: 10px;
+}
+#worldConfig div:first-child>.el-button{
+	margin-left: 20px;
+}

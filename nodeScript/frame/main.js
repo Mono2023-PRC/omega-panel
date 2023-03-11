@@ -4,7 +4,6 @@ const {shell} = require('electron');
 window.onload = () => {
 	vue()
 	setSocket();
-	
 }
 
 var vue = () => new Vue({

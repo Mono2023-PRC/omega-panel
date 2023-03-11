@@ -2,7 +2,7 @@
 var msgID = 0; //请求序号
 var socket; //WebSocket
 var omgData; //omg返回内容
-var omegaSideConnect = false;
+var omegaSideConnect = false;//side连接状态
 
 var setSocket = () => {
 	let sideColor = document.getElementsByClassName("side_")[0];
@@ -42,8 +42,6 @@ var setSocket = () => {
 
 		};
 	});
-
-
 }
 
 // 重连WebSocket
@@ -60,18 +58,18 @@ var socketClose = () => {
 var shellMsg = (msg) => {
 	socket.send(msg);
 }
-//Websocket
-var WebsocketMsg = (msgObj) => {
+//以后台身份执行命令
+var wsCmd = (msgObj) => {
 	let msg = `{"client":` + (msgID += 1) + `,"function":"send_ws_cmd","args":{"cmd":"` + msgObj + `"}}`
 	socket.send(msg)
-}
-//Player命令
-var PlayerMsg = (msgObj) => {
+};
+//以机器人身份执行命令
+var playerCmd = (msgObj) => {
 	let msg = `{"client":` + (msgID += 1) + `,"function":"send_player_cmd","args":{"cmd":"` + msgObj + `"}}`
 	socket.send(msg)
 }
 //控制台命令
-var cmdMsg = (msgObj) => {
+var fbCmd = (msgObj) => {
 	let msg = `{"client":` + (msgID += 1) + `,"function":"send_fb_cmd","args":{"cmd":"` + msgObj + `"}}`
 	socket.send(msg)
 }
@@ -91,6 +89,5 @@ var functionMsg2 = (msgObj1, msgObj2, msgObj3) => {
 		`"}}`
 	socket.send(msg)
 }
-
 
 // WebSocketEND

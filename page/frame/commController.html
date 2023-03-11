@@ -6,14 +6,96 @@
 		<script src="../../static/vue.min.js"></script>
 		<link rel="stylesheet" href="../../static/element/element.css">
 		<script src="../../static/element/element.js"></script>
-		
+
 		<link rel="stylesheet" href="../css/commController.css">
 		<script src="../../nodeScript/frame/commController.js"></script>
 	</head>
 	<body style="user-select: none;">
 		<div id="app">
-			<div id="main">
+			<div id="main" v-loading="load" element-loading-text="等待旁加载系统" element-loading-spinner="el-icon-loading">
 				<!-- 文档主体从此处开始 -->
+				<h3>您获取到的版本可能为测试版！该页面还在设计中。非最终版本, 在设计完成前不推荐使用</h3>
+				<el-divider></el-divider>
+				<!-- command -->
+				<div id="command">
+					<table>
+						<tr>
+							<td class="text">执行Minecraft命令：</td>
+							<td>
+								<el-input v-model="input.msgComd" placeholder="命令如：say hi"></el-input>
+								<el-select v-model="input.msgCmdMod" placeholder="请选择">
+									<el-option v-for="item in input.msgCmdMods" :key="item.value" :label="item.label"
+										:value="item.value">
+									</el-option>
+								</el-select>
+							</td>
+							<td>
+								<el-button type="primary" @click="msgComd()">提交</el-button>
+							</td>
+						</tr>
+						<tr>
+							<td class="text">执行控制台命令：</td>
+							<td>
+								<el-input v-model="input.fbCmd" placeholder="命令内容"></el-input>
+							</td>
+							<td>
+								<el-button type="primary" @click="fbCmd()">提交</el-button>
+							</td>
+						</tr>
+						<tr>
+							<td class="text">群聊消息(群服互通)：</td>
+							<td>
+								<el-input v-model="input.qqMsg" placeholder="消息"></el-input>
+							</td>
+							<td>
+								<el-button type="primary" @click="qqMsg()">提交</el-button>
+							</td>
+						</tr>
+						<tr>
+							<td class="text">
+								执行Omega函数：
+							</td>
+							<td id="msgFunctionInput">
+								<el-input v-model="input.msgFunction1" placeholder="函数：必填"></el-input>
+								<el-input v-model="input.msgFunction2" placeholder="数据类型:可选"></el-input>
+								<el-input v-model="input.msgFunction3" placeholder="数据值：可选"></el-input>
+							</td>
+							<td>
+								<el-button type="primary" @click="msgFunction()">提交</el-button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<el-divider></el-divider>
+				<!-- worldConfig -->
+				<div id="worldConfig">
+					<div class="block">
+						<span>游戏时间</span>
+						<el-slider v-model="worldConfig.time" max="18000"></el-slider>
+						<el-button type="primary" @click="timeSet()">更新</el-button>
+					</div>
+					<div class="block">
+						<span>天气调整</span>
+						<el-select v-model="worldConfig.weather" placeholder="请选择">
+							<el-option v-for="item in worldConfig.weathers" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+						<el-button type="primary" @click="weatherSet()">更新</el-button>
+					</div>
+					<div class="block">
+						<span>清理掉落</span>
+						<el-button type="primary" @click="killItems()">清理</el-button>
+					</div>
+				</div>
+				<el-divider></el-divider>
+				<!-- playerCommand -->
+				<div>
+					<div>
+						<span>在线玩家控制</span>
+						<el-button icon="el-icon-refresh"></el-button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

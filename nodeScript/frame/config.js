@@ -6,7 +6,6 @@ onload = () => {
 	fs.readFile('./data/config.json', (err, data) => {
 		if (err !== null) {} else {
 			let config = JSON.parse(data.toString());
-			
 			thisVue.$data.inputOmegaStorage = config.omega_storage;
 			thisVue.$data.inputSidePath = config.omega_side;
 			

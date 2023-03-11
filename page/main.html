@@ -29,7 +29,7 @@
 							<i class="el-icon-edit-outline"></i>
 							<span slot="title">组件配置</span>
 						</el-menu-item>
-						<el-menu-item index="3" @click="switchFrame('commController','el-icon-set-up','快捷控制')" disabled>
+						<el-menu-item index="3" @click="switchFrame('commController','el-icon-set-up','快捷控制')">
 							<i class="el-icon-set-up"></i>
 							<span slot="title">快捷控制</span>
 						</el-menu-item>
@@ -45,9 +45,9 @@
 							<i class="el-icon-discover"></i>
 							<span slot="title">OMG教程</span>
 						</el-menu-item>
-						<el-menu-item index="7" @click="switchFrame('OmgController','el-icon-cpu','OMG控制台')" disabled>
+						<el-menu-item index="7" @click="switchFrame('OmgController','el-icon-cpu','文件管理')" >
 							<i class="el-icon-cpu"></i>
-							<span slot="title">OMG控制台</span>
+							<span slot="title">文件管理</span>
 						</el-menu-item>
 						<el-menu-item index="8" @click="switchFrame('config','el-icon-setting','设置')">
 							<i class="el-icon-setting"></i>
@@ -87,6 +87,9 @@
 						<span>开源授权许可：</span>
 						<span class="info_jsonedit" @click="openExternal('https://github.com/josdejong/jsoneditor/blob/develop/LICENSE')">jsoneditor</span>
 					</div>
+					<div>为确保开源软件使用安全，请确认本地文件信息与
+						<span @click="openExternal('https://gitee.com/kukinghan/omega-panel/releases')">仓库文件</span>
+					信息一致</div>
 					<div>copyright © kukinghan</div>
 					<div class="butt">
 						<el-button type="primary" @click="infoAlert = false">确 定</el-button>
