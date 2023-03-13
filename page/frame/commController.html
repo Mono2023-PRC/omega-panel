@@ -13,7 +13,15 @@
 	<body style="user-select: none;">
 		<div id="app">
 			<div id="main" v-loading="load" element-loading-text="等待旁加载系统" element-loading-spinner="el-icon-loading">
+			<!-- <div id="main"> -->
 				<!-- 文档主体从此处开始 -->
+				
+				<el-menu :default-active="selectMenu" class="el-menu-demo" mode="horizontal" @select="menuSelect">
+					<el-menu-item index="1">命令执行</el-menu-item>
+					<el-menu-item index="2">快捷操作</el-menu-item>
+					<el-menu-item index="3">玩家控制</el-menu-item>
+				</el-menu>
+				
 				<h3>您获取到的版本可能为测试版！该页面还在设计中。非最终版本, 在设计完成前不推荐使用</h3>
 				<el-divider></el-divider>
 				<!-- command -->

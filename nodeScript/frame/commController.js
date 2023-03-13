@@ -4,15 +4,16 @@ onload = () => {
 	// side连接状态
 	thisVue.$data.load = !parent.omegaSideConnect;
 	// 每秒钟检测一次连接状态
-	setInterval(()=>{
+	setInterval(() => {
 		thisVue.$data.load = !parent.omegaSideConnect;
-	},1000)
+	}, 1000)
 }
 var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			load:true,//禁用页面
+			load: true, //禁用页面
+			selectMenu:"1", //菜单值
 			input: {
 				msgComd: "", // 执行命令输入框
 				msgCmdMod: "1", // 执行命令模式
@@ -48,16 +49,19 @@ var vue = () => new Vue({
 		}
 	},
 	methods: {
+		menuSelect(key, keyPath) {
+			console.log(key, keyPath);
+		},
 		// 执行命令
 		msgComd() {
 			let msg = this.input.msgComd;
 			let mod = this.input.msgCmdMod;
-			if (msg.substring(0,1) != "/") {
-				msg = "/"+msg
+			if (msg.substring(0, 1) != "/") {
+				msg = "/" + msg
 			};
 			if (mod == "1") {
 				socketFun.wsCmd(msg);
-			} else{
+			} else {
 				socketFun.playerCmd(msg);
 			};
 		},
