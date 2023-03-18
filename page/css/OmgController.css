@@ -2,3 +2,10 @@
 	width: 85%;
 	margin: 0 auto;
 }
+
+#fileList{
+	margin: 0 auto;
+	width: 80vh;
+	height: 50vh;
+	border: 1px solid darkgray;
+}

@@ -6,7 +6,7 @@
 		<script src="../../static/vue.min.js"></script>
 		<link rel="stylesheet" href="../../static/element/element.css">
 		<script src="../../static/element/element.js"></script>
-		
+
 		<link rel="stylesheet" href="../css/OmgController.css">
 		<script src="../../nodeScript/frame/OmgController.js"></script>
 	</head>
@@ -14,8 +14,21 @@
 		<div id="app">
 			<div id="main">
 				<!-- 文档主体从此处开始 -->
-				<h3>您获取到的版本可能为测试版！该页面还在设计中。非最终版本, 在设计完成前不推荐使用</h3>
-				
+				<h3>您获取到的版本可能为测试版！该页面不可用。该页面还在设计中。。。</h3>
+				<div id="fileList">
+					<!-- 文件列表 -->
+					<el-table :data="tableData" height="100%" style="width: 100%;" stripe>
+						<el-table-column label="文件" width='800'>
+							<template slot-scope="scope">
+								<ul>
+									<li class="search_name">{{ scope.row.name }}</li>
+									<li class="search_path">{{ scope.row.pathSrc }}</li>
+								</ul>
+							</template>
+						</el-table-column>
+					</el-table>
+					
+				</div>
 			</div>
 		</div>
 	</body>

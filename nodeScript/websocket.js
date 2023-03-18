@@ -2,14 +2,17 @@
 var msgID = 0; //请求序号
 var socket; //WebSocket
 var omgData; //omg返回内容
-var omegaSideConnect = false;//side连接状态
+var omegaSideConnect = false; //side连接状态
 
+// 初始化websocket
 var setSocket = () => {
+	// 更新连接状态显示
 	let sideColor = document.getElementsByClassName("side_")[0];
 	let sideinfo = document.getElementsByClassName("side_state")[0];
 	sideColor.className = "el-icon-loading";
 	sideinfo.innerHTML = "连接"
 
+	// 开始连接
 	let path;
 	fs.readFile('data/config.json', (err, data) => {
 		if (err !== null) {} else {
@@ -23,15 +26,12 @@ var setSocket = () => {
 				sideColor.className = "side_";
 				sideinfo.innerHTML = "在线"
 				omegaSideConnect = true;
-				
 			});
 			//接收websocket服务的数据
 			socket.addEventListener('message', function(e) {
-				console.log(e.data);
 				// 处理数据
 				let jsonMsg = JSON.parse(e.data);
 				omgData = jsonMsg; //保存结果
-
 			});
 			socket.addEventListener('close', function() {
 				sideColor.style.backgroundColor = "red";
@@ -46,12 +46,37 @@ var setSocket = () => {
 
 // 重连WebSocket
 var socketClose = () => {
+	document.getElementsByClassName("side_")[0].style.backgroundColor = "";
 	try {
 		socket.close();
 	} catch (e) {
 		console.log("无连接")
 	}
 	setSocket();
+}
+
+// 获取下一条返回内容
+// 超时无结果则返回0
+var getNext = async () => {
+	let msg = omgData;
+	let str;
+	await new Promise((ret) =>{
+		let time = 0;
+		let interval = setInterval(() => {
+			if (msg != omgData) {
+				str = omgData;
+				ret();
+				clearInterval(interval);
+			} else if (time > 600) {
+				str = 0;
+				ret();
+				clearInterval(interval);
+			} else {
+				time++;
+			}
+		}, 10);
+	});
+	return str;
 }
 
 // 通信
@@ -89,5 +114,4 @@ var functionMsg2 = (msgObj1, msgObj2, msgObj3) => {
 		`"}}`
 	socket.send(msg)
 }
-
 // WebSocketEND

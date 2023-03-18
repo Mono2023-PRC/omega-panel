@@ -13,19 +13,81 @@
 	<body style="user-select: none;">
 		<div id="app">
 			<div id="main" v-loading="load" element-loading-text="等待旁加载系统" element-loading-spinner="el-icon-loading">
-			<!-- <div id="main"> -->
+				<!-- <div id="main"> -->
 				<!-- 文档主体从此处开始 -->
-				
+
 				<el-menu :default-active="selectMenu" class="el-menu-demo" mode="horizontal" @select="menuSelect">
-					<el-menu-item index="1">命令执行</el-menu-item>
+					<el-menu-item index="1">玩家控制</el-menu-item>
 					<el-menu-item index="2">快捷操作</el-menu-item>
-					<el-menu-item index="3">玩家控制</el-menu-item>
+					<el-menu-item index="3">命令执行</el-menu-item>
 				</el-menu>
-				
-				<h3>您获取到的版本可能为测试版！该页面还在设计中。非最终版本, 在设计完成前不推荐使用</h3>
-				<el-divider></el-divider>
+				<!-- 
+	 玩家控制模块
+
+
+-->
+				<!-- playerCommand -->
+				<div id="playerCommadn" class="box">
+
+					<!-- vue-for 玩家列表 -->
+					<div class="playerlist">
+						<span v-for="name in player" v-text="name.name" class="name"
+							@click="playerSelect=name.name"></span>
+					</div>
+
+					<div>
+						<div class="right">
+							<el-button class="rebutt" @click="getAllPlayer()">刷新列表</el-button>
+
+							<span class="time">未获取数据，side服务离线</span>
+							<span>最后刷新：</span>
+						</div>
+					</div>
+					
+					<el-divider></el-divider>
+					
+					<div class="playerselect">
+						<div>选中玩家：</div>
+						<el-input placeholder="请选择玩家" v-model="playerSelect" disabled></el-input>
+						<el-select v-model="playerOption" placeholder="请选择">
+							<el-option v-for="item in playerOptions" :key="item.value" :label="item.label" :value="item.value">
+							</el-option>
+						</el-select>
+					</div>
+				</div>
+				<!-- 
+	 快捷操作模块
+	
+
+-->
+				<!-- worldConfig -->
+				<div id="worldConfig" class="box">
+					<div class="block">
+						<span>游戏时间</span>
+						<el-slider v-model="worldConfig.time" max="18000"></el-slider>
+						<el-button type="primary" @click="timeSet()">更新</el-button>
+					</div>
+					<div class="block">
+						<span>天气调整</span>
+						<el-select v-model="worldConfig.weather" placeholder="请选择">
+							<el-option v-for="item in worldConfig.weathers" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+						<el-button type="primary" @click="weatherSet()">更新</el-button>
+					</div>
+					<div class="block">
+						<span>清理掉落</span>
+						<el-button type="primary" @click="killItems()">清理</el-button>
+					</div>
+				</div>
+				<!-- 
+	 命令执行模块
+	
+
+-->
 				<!-- command -->
-				<div id="command">
+				<div id="command" class="box">
 					<table>
 						<tr>
 							<td class="text">执行Minecraft命令：</td>
@@ -73,36 +135,6 @@
 							</td>
 						</tr>
 					</table>
-				</div>
-				<el-divider></el-divider>
-				<!-- worldConfig -->
-				<div id="worldConfig">
-					<div class="block">
-						<span>游戏时间</span>
-						<el-slider v-model="worldConfig.time" max="18000"></el-slider>
-						<el-button type="primary" @click="timeSet()">更新</el-button>
-					</div>
-					<div class="block">
-						<span>天气调整</span>
-						<el-select v-model="worldConfig.weather" placeholder="请选择">
-							<el-option v-for="item in worldConfig.weathers" :key="item.value" :label="item.label"
-								:value="item.value">
-							</el-option>
-						</el-select>
-						<el-button type="primary" @click="weatherSet()">更新</el-button>
-					</div>
-					<div class="block">
-						<span>清理掉落</span>
-						<el-button type="primary" @click="killItems()">清理</el-button>
-					</div>
-				</div>
-				<el-divider></el-divider>
-				<!-- playerCommand -->
-				<div>
-					<div>
-						<span>在线玩家控制</span>
-						<el-button icon="el-icon-refresh"></el-button>
-					</div>
 				</div>
 			</div>
 		</div>

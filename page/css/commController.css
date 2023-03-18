@@ -1,31 +1,111 @@
-#main{
+#main {
 	width: 95%;
 	margin: 0 auto;
 }
+/* 排他显示 */
+.box {
+	display: none;
+	position: relative;
+	top: 10px;
+}
 
-/* 执行omega函数 */
-#msgFunctionInput{
+/* 排他显示 END */
+
+/* 玩家控制模块 */
+#playerCommadn{
+	width: 100%;
+	height: 85vh;
+}
+#playerCommadn .right>span{
+	float: right;
+	color: #00aaff;
+	text-shadow: 1px 1px 1px darkgray;
+}
+#playerCommadn .rebutt{
+	height: 30px;
+	font-size: 0.8em;
+	position: relative;
+	top: 4px;
+}
+#playerCommadn .rebutt span{
+	position: relative;
+	top: -4px;
+}
+#playerCommadn .playerlist{
+	width: 100%;
+	height: 41%;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .22), 0 0 6px rgba(0, 0, 0, .12);
 	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+#playerCommadn .playerlist .name{
+	width: 19.5%;
+	height: 30px;
+	text-align: center;
+}
+#playerCommadn .playerlist .name:hover{
+	border-radius: 4px;
+	background-color: #aedcff;
+}
+#playerCommadn .playerlist .name:active{
+	background-color: #1592ff;
+	
 }
 
-/* 执行命令 */
-#command table tr:first-child td:nth-child(2){
-	display: flex;
+#playerCommadn .playerselect{
+	margin-top: 15px;
 }
-#command table .text{
-	text-align: justify;
-	text-align-last: justify;
+#playerCommadn .playerselect :first-child{
+	display: inline-block;
 }
-/* 执行命令END */
+#playerCommadn .playerselect :nth-child(2){
+	width: 15%;
+	display: inline-block;
+}
 
-/* 世界控制 */
-#worldConfig div:first-child .el-slider{
+/* 玩家控制模块END */
+
+
+/* 快捷操作模块 */
+#worldConfig div:first-child .el-slider {
 	display: inline-block;
 	width: 70%;
 	margin-left: 10px;
 	position: relative;
 	top: 10px;
 }
-#worldConfig div:first-child>.el-button{
+
+#worldConfig div:first-child>.el-button {
 	margin-left: 20px;
 }
+
+/* 快捷操作模块END */
+
+
+/* 命令执行模块 */
+#command table tr td {
+	padding: 5px;
+}
+
+#command table tr td .el-input {
+	margin: 0 0px 0 5px;
+}
+
+/* 执行omega函数 */
+#msgFunctionInput {
+	display: flex;
+}
+
+/* 执行命令 */
+#command table tr:first-child td:nth-child(2) {
+	display: flex;
+}
+
+#command table .text {
+	text-align: justify;
+	text-align-last: justify;
+}
+
+/* 命令执行模块 END */
