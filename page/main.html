@@ -59,7 +59,7 @@
 						</el-menu-item>
 					</el-menu>
 					<div id="side">
-						<span>旁加载系统 </span>
+						<span>旁加载系统[side]</span>
 						<div class="side_"> </div>
 						<span class="side_state"></span>
 					</div>
@@ -78,6 +78,7 @@
 			<!-- info -->
 			<div id="info">
 				<el-dialog title="软件信息" :visible.sync="infoAlert" width="50%">
+					<div>本软件是基于Omega系统（Omega ManagEment and Game Auxiliary）开发的服务器管理软件</div>
 					<div>
 						<span>项目开源地址：</span>
 						<el-button plain @click="openExternal('https://gitee.com/kukinghan/omega-panel')">Gitee</el-button>
@@ -90,7 +91,7 @@
 					<div>为确保开源软件使用安全，请确认本地文件信息与
 						<span @click="openExternal('https://gitee.com/kukinghan/omega-panel/releases')">仓库文件</span>
 					信息一致</div>
-					<div>界面设计持续征集中，欢迎投稿设计图</div>
+					<div>界面设计持续征集中，欢迎投稿设计图。</div>
 					<div>copyright © kukinghan</div>
 					<div class="butt">
 						<el-button type="primary" @click="infoAlert = false">确 定</el-button>

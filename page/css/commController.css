@@ -60,7 +60,7 @@
 #playerCommadn .playerselect :first-child{
 	display: inline-block;
 }
-#playerCommadn .playerselect :nth-child(2){
+#playerCommadn .playerselect>div{
 	width: 15%;
 	display: inline-block;
 }

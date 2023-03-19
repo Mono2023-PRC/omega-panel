@@ -40,7 +40,7 @@ var setSocket = () => {
 				omegaSideConnect = false;
 				setTimeout(()=>{
 					sideColor.style.backgroundColor = "orange";
-					sideinfo.innerHTML = "重连"
+					sideinfo.innerHTML = "重试"
 					setTimeout(()=>{
 						socketClose();
 					},2000);
