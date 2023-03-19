@@ -38,6 +38,13 @@ var setSocket = () => {
 				sideColor.className = "side_";
 				sideinfo.innerHTML = "离线"
 				omegaSideConnect = false;
+				setTimeout(()=>{
+					sideColor.style.backgroundColor = "orange";
+					sideinfo.innerHTML = "重连"
+					setTimeout(()=>{
+						socketClose();
+					},2000);
+				},800);
 			});
 
 		};
