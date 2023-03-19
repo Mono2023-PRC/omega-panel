@@ -154,7 +154,14 @@ var vue = () => new Vue({
 					let b = JSON.stringify(a, "", "	");
 					fs.writeFile(path.join(url), b, (err) => {})
 				});
+				// 显示状态更新
 				this.tableData.forEach((index) => {
+					if (index.name == name) {
+						index.verboten = !index.verboten
+					}
+				})
+				// 文件数据更新
+				fillArr.forEach((index)=>{
 					if (index.name == name) {
 						index.verboten = !index.verboten
 					}
