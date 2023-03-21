@@ -12,7 +12,7 @@
 	</head>
 	<body style="user-select: none;">
 		<div id="app">
-			<div id="main" v-loading="load" element-loading-text="等待旁加载系统" element-loading-spinner="el-icon-loading">
+			<div id="main" v-loading="load" element-loading-text="等待旁加载系统连接. . .  该模块依赖OmegaSide旁加载组件" element-loading-spinner="el-icon-loading">
 				<!-- <div id="main"> -->
 				<!-- 文档主体从此处开始 -->
 
@@ -30,26 +30,25 @@
 				<div id="playerCommadn" class="box">
 
 					<!-- vue-for 玩家列表 -->
-					<div class="playerlist">
-						<span v-for="name in player" v-text="name.name" class="name"
-							@click="playerSelect=name.name"></span>
-					</div>
-
-					<div>
+					<div class="playerCommadn_playerlist">
+						<div class="playerlist">
+							<span v-for="name in player" v-text="name.name" class="name"
+								@click="playerSelect=name.name"></span>
+						</div>
+						
 						<div class="right">
-							<el-button class="rebutt" @click="getAllPlayer()">刷新列表</el-button>
-
-							<span class="time">未获取数据，side服务离线</span>
 							<span>最后刷新：</span>
+							<span class="time">side服务离线</span>
+							<div>选中玩家：</div>
+							<el-input placeholder="请选择玩家" v-model="playerSelect" disabled></el-input>
+							<el-button class="rebutt" @click="getAllPlayer()">刷新玩家列表</el-button>
 						</div>
 					</div>
 					
 					<el-divider></el-divider>
 					
-					
 					<div class="playerselect">
 						<span>药水效果:</span>
-						<el-input placeholder="请选择玩家" v-model="playerSelect" disabled></el-input>
 						<el-select v-model="effectOpthin" placeholder="请选择">
 							<el-option v-for="item in effect" :key="item.value" :label="item.name" :value="item.value">
 							</el-option>
@@ -62,7 +61,6 @@
 					</div>
 					<div class="playerselect">
 						<span>快捷指令:</span>
-						<el-input placeholder="请选择玩家" v-model="playerSelect" disabled></el-input>
 						<el-select v-model="playerOption" placeholder="请选择">
 							<el-option v-for="item in playerOptions" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
@@ -71,7 +69,6 @@
 					</div>
 					<div class="playerselect">
 						<span>货币操作:</span>
-						<el-input placeholder="请选择玩家" v-model="playerSelect" disabled></el-input>
 						<span>数量:</span>
 						<el-input-number v-model="money"  :min="1" :max="100000000" label="货币数量" disabled></el-input-number>
 						<span>记分板:</span>

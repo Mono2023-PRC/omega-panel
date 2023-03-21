@@ -16,24 +16,33 @@
 	width: 100%;
 	height: 85vh;
 }
+#playerCommadn .right{
+	margin-left: 10px;
+	width: 20%;
+	display: block;
+}
+#playerCommadn .right :nth-child(3){
+	padding: 35px 0 10px 0;
+}
+#playerCommadn .rebutt{
+	margin-top: 10px;
+}
+#playerCommadn .right button{
+	width: 100%;
+}
 #playerCommadn .right>span{
-	float: right;
+	font-size: 0.8em;
 	color: #00aaff;
 	text-shadow: 1px 1px 1px darkgray;
 }
-#playerCommadn .rebutt{
-	height: 30px;
-	font-size: 0.8em;
-	position: relative;
-	top: 4px;
+#playerCommadn .playerCommadn_playerlist{
+	display: flex;
 }
-#playerCommadn .rebutt span{
-	position: relative;
-	top: -4px;
-}
+
 #playerCommadn .playerlist{
-	width: 100%;
-	height: 41%;
+	float: left;
+	width: 80%;
+	height: 183px;
 	border-radius: 4px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, .22), 0 0 6px rgba(0, 0, 0, .12);
 	display: flex;
@@ -41,8 +50,9 @@
 	align-content: flex-start;
 }
 #playerCommadn .playerlist .name{
-	width: 19.5%;
-	height: 30px;
+	width: 20%;
+	height: 22px;
+	margin-bottom: 1px;
 	text-align: center;
 }
 #playerCommadn .playerlist .name:hover{
@@ -54,7 +64,7 @@
 	
 }
 
-#playerCommadn .playerselect{
+#playerCommadn .playerselect{	
 	margin-top: 15px;
 }
 #playerCommadn .playerselect :first-child{

@@ -2,12 +2,12 @@ var socketFun = parent;
 onload = () => {
 	let thisVue = vue();
 	// side连接状态
-	// thisVue.$data.load = !parent.omegaSideConnect;
+	thisVue.$data.load = !parent.omegaSideConnect;
 	thisVue.menuSelect(0, "1")
 	thisVue.getAllPlayer();
 	// 每秒钟检测一次连接状态
 	setInterval(() => {
-		// thisVue.$data.load = !parent.omegaSideConnect;
+		thisVue.$data.load = !parent.omegaSideConnect;
 	}, 1000)
 }
 var vue = () => new Vue({
@@ -211,10 +211,10 @@ var vue = () => new Vue({
 		playerCmdExecute() {
 			let vue = this;
 			if (vue.playerOption == "") {
-				vue.openWarr("执行内容不能为空");
+				vue.openWarr("内容不能为空");
 				return;
 			} else if (vue.playerSelect == "") {
-				vue.openWarr("请选择执行对象");
+				vue.openWarr("请选择执行玩家");
 				return;
 			};
 			switch (vue.playerOption) {
