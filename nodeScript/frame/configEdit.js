@@ -49,6 +49,7 @@ function readDirSync(Path) {
 onload = () => {
 	let thisVue = vue();
 	thisVue.loadConfig();
+
 }
 
 var vue = () => new Vue({
@@ -219,6 +220,7 @@ var vue = () => new Vue({
 			this.$confirm('确认关闭？')
 				.then(_ => {
 					done();
+					location = "";
 				})
 				.catch(_ => {});
 		},
@@ -240,14 +242,7 @@ var vue = () => new Vue({
 					fs.writeFile(src, str, (err) => {
 						this.openOk('保存成功');
 					});
-				}
-				// 刷新按钮
-				setTimeout(() => {
-					// 先用上面的逻辑遍历,哪天想起来再做这个功能
-					// console.log(this.jsonEdit1.title);
-					// console.log(this.jsonEdit2.title);
-					// 拿到名字=name,重读文件,拿到值,修改tableDatad的verboten,重写按钮，
-				})
+				};
 			} catch (e) {
 				this.openErr('json存在语法错误，保存失败');
 				setTimeout(() => {

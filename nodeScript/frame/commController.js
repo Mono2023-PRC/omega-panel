@@ -1,4 +1,7 @@
 var socketFun = parent;
+// const require = parent.window.require;
+// const fs = require('fs');
+
 onload = () => {
 	let thisVue = vue();
 	// side连接状态
@@ -152,10 +155,23 @@ var vue = () => new Vue({
 				},
 			],
 			effectOpthin: "",
-			effectTime: "",
+			effectTime: "60",
 			effectLeve:"",
-			money:"",//金币数量
-			moneyName:"",//记分板名称
+			score:"",//分数
+			scoreName:"",//记分板名称
+			scoreOptions:[{
+				value: '1',
+				label: '增加'
+			},
+			{
+				value: '2',
+				label: '扣除'
+			},
+			{
+				value: '3',
+				label: '设置'
+			}],
+			scoreOption:"1",
 			// 快捷操作
 			worldConfig: {
 				time: "",
@@ -275,6 +291,10 @@ var vue = () => new Vue({
 			};
 			socketFun.wsCmd("/effect "+vue.playerSelect+" "+vue.effectOpthin+" "+vue.effectTime);
 			vue.openOk("请求已提交至omega");
+		},
+		// 分数操作
+		scoreExecute(){
+			
 		},
 		/**
 		 * 快捷操作模块

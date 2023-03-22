@@ -63,18 +63,9 @@
 	background-color: #1592ff;
 	
 }
-
-#playerCommadn .playerselect{	
-	margin-top: 15px;
+#playerCommadn .moneyName{
+	width: 200px;
 }
-#playerCommadn .playerselect :first-child{
-	display: inline-block;
-}
-#playerCommadn .playerselect>div{
-	width: 15%;
-	display: inline-block;
-}
-
 /* 玩家控制模块END */
 
 
