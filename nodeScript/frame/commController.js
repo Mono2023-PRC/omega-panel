@@ -1,13 +1,34 @@
 var socketFun = parent;
-// const require = parent.window.require;
-// const fs = require('fs');
+const require = parent.window.require;
+const fs = require('fs');
 
 onload = () => {
 	let thisVue = vue();
-	// side连接状态
-	thisVue.$data.load = !parent.omegaSideConnect;
-	thisVue.menuSelect(0, "1")
-	thisVue.getAllPlayer();
+	thisVue.$data.load = !parent.omegaSideConnect; // side连接状态
+	// side无连接,检测是否因为组件未开启
+	if (!parent.omegaSideConnect) {
+		console.log("开始判断");
+		let rootPath = null;
+		fs.readFile('./data/config.json', 'utf8', (err, data) => {
+			if (err !== null) {} else {
+				let config = JSON.parse(data.toString());
+				rootPath = config.omega_storage + "\\配置\\OmegaSide旁加载组件系统\\组件-OmegaSide旁加载组件系统-1.json";
+			};
+			fs.readFile(rootPath, 'utf8', (err, data) => {
+				if (err !== null) {} else {
+					let config = JSON.parse(data.toString());
+					// 旁加载系统已被禁用
+					if (config.是否禁用) {
+
+						thisVue.openSide(rootPath, config);
+					};
+				};
+			});
+		});
+
+	}
+	thisVue.menuSelect(0, "1") // 切换至第一个选项卡
+	thisVue.getAllPlayer(); // 尝试获取玩家列表
 	// 每秒钟检测一次连接状态
 	setInterval(() => {
 		thisVue.$data.load = !parent.omegaSideConnect;
@@ -156,22 +177,23 @@ var vue = () => new Vue({
 			],
 			effectOpthin: "",
 			effectTime: "60",
-			effectLeve:"",
-			score:"",//分数
-			scoreName:"",//记分板名称
-			scoreOptions:[{
-				value: '1',
-				label: '增加'
-			},
-			{
-				value: '2',
-				label: '扣除'
-			},
-			{
-				value: '3',
-				label: '设置'
-			}],
-			scoreOption:"1",
+			effectLeve: "",
+			score: "", //分数
+			scoreName: "", //记分板名称
+			scoreOptions: [{
+					value: 'add',
+					label: '增加'
+				},
+				{
+					value: 'remove',
+					label: '扣除'
+				},
+				{
+					value: 'set',
+					label: '设置'
+				}
+			],
+			scoreOption: "add",
 			// 快捷操作
 			worldConfig: {
 				time: "",
@@ -289,12 +311,21 @@ var vue = () => new Vue({
 				vue.openWarr("请选择执行对象");
 				return;
 			};
-			socketFun.wsCmd("/effect "+vue.playerSelect+" "+vue.effectOpthin+" "+vue.effectTime);
+			socketFun.wsCmd("/effect " + vue.playerSelect + " " + vue.effectOpthin + " " + vue.effectTime);
 			vue.openOk("请求已提交至omega");
 		},
 		// 分数操作
-		scoreExecute(){
-			
+		scoreExecute() {
+			let vue = this;
+			if (vue.scoreName == "") {
+				vue.openWarr("记分板名不能为空");
+				return;
+			} else if (vue.playerSelect == "") {
+				vue.openWarr("请选择执行对象");
+				return;
+			};
+			socketFun.wsCmd("/scoreboard players "+vue.scoreOption+" "+vue.playerSelect+" "+vue.scoreName+" "+vue.score);
+			vue.openOk("请求已提交至omega");
 		},
 		/**
 		 * 快捷操作模块
@@ -374,5 +405,22 @@ var vue = () => new Vue({
 				type: 'warning'
 			});
 		},
+		// 尝试开启side
+		openSide(path, obj) {
+			this.$confirm('该模块依赖旁加载组件系统，检测到组件未启用。  是否尝试启用该组件？。', '旁加载未启用！', {
+				confirmButtonText: '启用组件',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				obj.是否禁用 = false;
+				obj.配置.只打开用于开发的Websocket端口而不启动任何插件 = true;
+				fs.writeFile(path, JSON.stringify(obj, "", "	"), function(err) {
+					console.log(err);
+				})
+				this.$alert('配置文件已变更，请重启Omega!', '成功', {
+					confirmButtonText: '确定',
+				});
+			});
+		}
 	}
 })

@@ -18,8 +18,13 @@ var setSocket = () => {
 		if (err !== null) {} else {
 			let config = JSON.parse(data.toString());
 			path = config.omega_side;
+			
+			try{
+				socket = new WebSocket("ws://" + path + "/omega_side ");
+			}catch(e){
+				
+			}
 
-			socket = new WebSocket("ws://" + path + "/omega_side ");
 			socket.addEventListener('open', function() {
 				// 打开websocket连接
 				sideColor.style.backgroundColor = "green";
