@@ -85,18 +85,14 @@
 										:value="item.value">
 									</el-option>
 								</el-select>
-								<el-input placeholder="记分板名称" v-model="scoreName" class="moneyName"></el-input>
 								数量:
 								<el-input-number v-model="score" :min="1" :max="100000000" label="货币数量">
 								</el-input-number>
+								<el-input placeholder="记分板名称" v-model="scoreName" class="moneyName"></el-input>
 							</td>
 							<td>
 								<el-button type="primary" @click="scoreExecute()">执行</el-button>
 							</td>
-						</tr>
-						<tr>
-							<td>封禁时间（组件）：</td>
-							<td></td>
 						</tr>
 					</table>
 				</div>

@@ -1,11 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+}
 #main{
-	width: 85%;
+	width: 100%;
 	margin: 0 auto;
 }
 
 #fileList{
 	margin: 0 auto;
-	width: 80vh;
-	height: 50vh;
-	border: 1px solid darkgray;
+	width: 100%;
+	height: 70vh;
 }
+
+/* 筛选搜索 */
+#search{
+	height: 60px;
+}
+
+#search>:first-child{
+	display: inline-block;
+	float: left;
+	width: 90%;
+	margin: 15px 0 5px 10px;
+}
+#search>:last-child {
+	display: inline-block;
+	float: right;
+	margin: 15px 15px 5px 0;
+	width: 7%;
+}
+/* 筛选搜索END */

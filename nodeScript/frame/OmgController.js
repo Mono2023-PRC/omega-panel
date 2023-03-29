@@ -1,16 +1,24 @@
 const require = parent.window.require;
 const fs = require("fs");
 const path = require("path");
+const { shell } = require("electron");
 var rootPath;
+var dataPath;
 var fillArr = []; //文件列表
+var loadSpeed;
 
 // 读取配置
 fs.readFile('./data/config.json', 'utf8', (err, data) => {
 	if (err !== null) {} else {
 		let config = JSON.parse(data.toString());
-		rootPath = config.omega_storage + "\\data";
+		rootPath = config.omega_storage;
+		dataPath = config.omega_storage + "\\data";
+		fs.readFile(rootPath+"\\配置\\统一导入系统\\组件-统一导入系统-1.json", 'utf8', (err, data) => {
+			loadSpeed = JSON.parse(data.toString())
+			.配置.每秒导入普通方块数目;
+		});
 	};
-	readDirSync(rootPath);
+	readDirSync(dataPath);
 });
 
 
@@ -20,13 +28,39 @@ function readDirSync(Path) {
 	pa.forEach(function(ele, index) {
 		let info = fs.statSync(Path + "\\" + ele)
 		if (info.isDirectory()) {
-			// 回调遍历
+			// 递归遍历
 			readDirSync(Path + "\\" + ele);
 		} else {
-			fillArr.push({
-				name: ele,
-				pathSrc: Path + ele
-			})
+			let len = ele.length;
+			let src = Path.substring(Path.indexOf("data")) + "\\" + ele;
+			let size = 0;
+			fs.stat(Path + "\\" + ele, (err, stats) => {
+				size = ((stats.size / 1024).toFixed(2)) + " KB";
+				// 判断类型,加入列表
+				if (ele.substring(len - 6) == ".schem") {
+					fillArr.push({
+						name: path.basename(ele, '.schem'),
+						src: src,
+						size: size,
+						type: "schem"
+					})
+				} else if (ele.substring(len - 10) == ".schematic") {
+					fillArr.push({
+						name: path.basename(ele, '.schematic'),
+						src: src,
+						size: size,
+						type: "schematic"
+					})
+				} else if (ele.substring(len - 4) == ".bdx") {
+					fillArr.push({
+						name: path.basename(ele, '.bdx'),
+						src: src,
+						size: size,
+						type: "bdx"
+					})
+				}
+			});
+
 		}
 	})
 }
@@ -34,16 +68,64 @@ function readDirSync(Path) {
 onload = () => {
 	let thisVue = vue();
 	thisVue.loadConfig();
+	
+	// 等待导入速度读取结果
+	let time = 0;
+	let interval = setInterval(() => {
+		if (loadSpeed) {
+			thisVue.loadSpeed = loadSpeed;
+			clearInterval(interval);
+		} else if (time > 100) {
+			clearInterval(interval);
+		} else {
+			time++;
+		}
+	}, 10);
+	
 }
 
 var vue = () => new Vue({
 	el: '#app',
 	data: function() {
 		return {
-			tableData: [] //文件列表
+			tableData: [], //文件列表
+			search: '' ,//搜索框
+			loadSpeed:0,//导入速度
+			fileInputWindow:false,
+			fileSelect:{
+				// 选中导入文件
+				name:"",
+				src:""
+			}
 		}
 	},
 	methods: {
+		// 搜索筛选
+		searchConfig() {
+			let data = [];
+			let val = this.search;
+			for (var i = 0; i < fillArr.length; i++) {
+				if (fillArr[i].name.indexOf(val) > -1) {
+					data.push({
+						name: fillArr[i].name,
+						src: fillArr[i].src,
+						size: fillArr[i].size,
+						type: fillArr[i].type
+					});
+				}
+			}
+			this.tableData = data;
+		},
+		// 清空搜索框
+		searchClear() {
+			this.search = '';
+			this.searchConfig();
+		},
+		// 文件类型筛选
+		stateHandler(value, row, column) {
+			const property = column['property'];
+			return row[property] === value;
+		},
 		// 加载配置
 		loadConfig() {
 			let fillArrIsUndefined = true;
@@ -58,7 +140,9 @@ var vue = () => new Vue({
 								for (var i = 0; i < fillArr.length; i++) {
 									this.tableData.push({
 										name: fillArr[i].name,
-										pathSrc: fillArr[i].pathSrc
+										src: fillArr[i].src,
+										size: fillArr[i].size,
+										type: fillArr[i].type
 									});
 								}
 								fillArrIsUndefined = false;
@@ -70,10 +154,34 @@ var vue = () => new Vue({
 					// 超时
 					if (timeOut > 1000) {
 						fillArrIsUndefined = false;
-						alert("获取文件超时！请检查omege是否正确运行");
 					}
 				}
 			})();
+		},
+		// 导入文件
+		fileInput(name,src){
+			let vue = this;
+			vue.fileInputWindow = true;
+			vue.fileSelect.name = name;
+			vue.fileSelect.src = src;
+		},
+		// 删除文件
+		deleteFile(name,src) {
+			let vue = this;
+			this.$confirm('此操作将永久删除该文件:【'+name+'】, 是否继续?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				let a = src.substring(src.indexOf("\\")+1);
+				let file = dataPath+"\\"+a;
+				fs.unlinkSync(file);//删除文件
+				location = ""
+			});
+		},
+		// 使用系统资源管理器打开文件夹
+		openDir(){
+			shell.openPath(dataPath)
 		}
 	}
 })

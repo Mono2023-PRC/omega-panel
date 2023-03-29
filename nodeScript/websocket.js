@@ -36,6 +36,7 @@ var setSocket = () => {
 			socket.addEventListener('message', function(e) {
 				// 处理数据
 				let jsonMsg = JSON.parse(e.data);
+				console.log(jsonMsg);
 				omgData = jsonMsg; //保存结果
 			});
 			socket.addEventListener('close', function() {

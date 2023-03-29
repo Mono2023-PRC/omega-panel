@@ -13,22 +13,56 @@
 	<body style="user-select: none;">
 		<div id="app">
 			<div id="main">
+				<h1>警告！该页面不可用。</h1>
 				<!-- 文档主体从此处开始 -->
-				<h3>您获取到的版本可能为测试版！该页面不可用。该页面还在设计中。。。</h3>
+				<div id="search">
+					<div>
+						<el-input v-model="search" placeholder="输入名称进行筛选" @input.native='searchConfig'></el-input>
+					</div>
+					<div>
+						<el-button plain icon="el-icon-close" @click='searchClear'>清空</el-button>
+					</div>
+				</div>
 				<div id="fileList">
 					<!-- 文件列表 -->
 					<el-table :data="tableData" height="100%" style="width: 100%;" stripe>
-						<el-table-column label="文件" width='800'>
+						<el-table-column label="文件" width='500'>
 							<template slot-scope="scope">
-								<ul>
-									<li class="search_name">{{ scope.row.name }}</li>
-									<li class="search_path">{{ scope.row.pathSrc }}</li>
-								</ul>
+								<span>{{ scope.row.name }}</span>
+								<br />
+								<span>{{ scope.row.src }}</span>
+							</template>
+						</el-table-column>
+						<el-table-column label="大小" width='150' prop="size" sortable>
+						</el-table-column>
+						<el-table-column label="文件类型" width='150' prop="type" sortable
+						:filters="[{text: 'schematic', value: 'schematic'}, {text: 'schem', value: 'schem'}, {text: 'bdx', value: 'bdx'}]"
+						:filter-method="stateHandler">
+						</el-table-column>
+						<el-table-column label="操作">
+							<template slot-scope="scope">
+								 <el-button type="primary" @click="fileInput(scope.row.name,scope.row.src)" plain>导入</el-button>
+								 <el-button type="danger" @click="deleteFile(scope.row.name,scope.row.src)" plain>删除</el-button>
 							</template>
 						</el-table-column>
 					</el-table>
-					
 				</div>
+				<div>
+					
+					<el-button type="primary" @click="openDir()">打开文件夹</el-button>
+				</div>
+				<el-dialog title="文件导入" :visible.sync="fileInputWindow">
+					<span>导入文件：</span>
+					<span>{{fileSelect.name}}</span>
+					<!-- fb导入 -->
+					<div>
+						
+					</div>
+					<!-- omega导入 -->
+					<div>
+						<span>导入设置：<span>{{loadSpeed}}</span>方块/秒</span>
+					</div>
+				</el-dialog>
 			</div>
 		</div>
 	</body>
