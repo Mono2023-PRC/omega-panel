@@ -50,7 +50,7 @@ var vue = () => new Vue({
 				label: '杀死玩家'
 			}, {
 				value: '2',
-				label: '踢出玩家'
+				label: '获取坐标'
 			}, {
 				value: '3',
 				label: '清空背包'
@@ -72,6 +72,9 @@ var vue = () => new Vue({
 			}, {
 				value: '9',
 				label: '撤销OP（风险操作）'
+			}, {
+				value: '10',
+				label: '踢出玩家'
 			}],
 			playerOption: "",
 			effect: [{
@@ -178,6 +181,7 @@ var vue = () => new Vue({
 			effectOpthin: "",
 			effectTime: "60",
 			effectLeve: "",
+			playerPlace:"",//玩家坐标
 			score: "", //分数
 			scoreName: "", //记分板名称
 			scoreOptions: [{
@@ -261,8 +265,12 @@ var vue = () => new Vue({
 					socketFun.wsCmd("/kill " + vue.playerSelect);
 					break;
 				case '2':
-					// '踢出玩家'
-					socketFun.wsCmd("/kick " + vue.playerSelect);
+					// '获取玩家坐标'
+					socketFun.getPlayerPlace(vue.playerSelect);
+					(async ()=>{
+						let msg = await socketFun.getNext();
+						vue.playerPlace = "获取到坐标："+msg.data.pos;
+					})();
 					break;
 				case '3':
 					// '清空背包'
@@ -295,6 +303,10 @@ var vue = () => new Vue({
 					// '撤销OP（风险操作）'
 					socketFun.wsCmd("/deop " + vue.playerSelect);
 					break;
+				case '10':
+					// '踢出玩家'
+					socketFun.wsCmd("/kick " + vue.playerSelect);
+					break;
 				default:
 					vue.openWarr("请求参数不合法");
 					break;
@@ -324,7 +336,8 @@ var vue = () => new Vue({
 				vue.openWarr("请选择执行对象");
 				return;
 			};
-			socketFun.wsCmd("/scoreboard players "+vue.scoreOption+" "+vue.playerSelect+" "+vue.scoreName+" "+vue.score);
+			socketFun.wsCmd("/scoreboard players " + vue.scoreOption + " " + vue.playerSelect + " " + vue
+				.scoreName + " " + vue.score);
 			vue.openOk("请求已提交至omega");
 		},
 		/**

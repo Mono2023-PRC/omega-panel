@@ -70,6 +70,12 @@ var socketClose = () => {
 
 // 获取下一条返回内容
 // 超时无结果则返回0
+/**
+ * 此处待优化！，设计一个参数接收回调函数。设计一个结束请求函数清空缓存。
+ * 该函数仅为理想情况下，omega可以在6秒内返回结果。
+ * 重构理由：需要考虑omega本身发生异常，或用户计算机发生异常。无法在6秒内正常返回
+ * 重构风险：该函数与程序高度耦合，重构时请检查引用
+ */
 var getNext = async () => {
 	let msg = omgData;
 	let str;
@@ -121,10 +127,9 @@ var functionMsg = (msgObj) => {
 	let msg = `{"client":` + (msgID += 1) + `,"function":"` + msgObj + `","args":{}}`
 	socket.send(msg)
 }
-// 有参函数
-var functionMsg2 = (msgObj1, msgObj2, msgObj3) => {
-	let msg = `{"client":` + (msgID += 1) + `,"function":"` + msgObj1 + `","args":{"` + msgObj2 + `":"` + msgObj3 +
-		`"}}`
-	socket.send(msg)
+//获取玩家坐标
+var getPlayerPlace = (player)=>{
+	let msg = `{"client":` + (msgID += 1) + `,"function":"player.pos","args":{"player":"` + player + `","limit":"@p"}}`
+	socket.send(msg);
 }
 // WebSocketEND
