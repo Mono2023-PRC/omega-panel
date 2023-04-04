@@ -17,8 +17,7 @@
 	height: 85vh;
 }
 #playerCommadn .right{
-	margin-left: 10px;
-	width: 20%;
+	width: 100%;
 	display: block;
 }
 #playerCommadn .right :nth-child(3){
@@ -35,13 +34,9 @@
 	color: #00aaff;
 	text-shadow: 1px 1px 1px darkgray;
 }
-#playerCommadn .playerCommadn_playerlist{
-	display: flex;
-}
 
 #playerCommadn .playerlist{
-	float: left;
-	width: 80%;
+	width: 100%;
 	height: 183px;
 	border-radius: 4px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, .22), 0 0 6px rgba(0, 0, 0, .12);

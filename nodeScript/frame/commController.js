@@ -4,7 +4,7 @@ const fs = require('fs');
 
 onload = () => {
 	let thisVue = vue();
-	thisVue.$data.load = !parent.omegaSideConnect; // side连接状态
+	// thisVue.$data.load = !parent.omegaSideConnect; // side连接状态
 	// side无连接,检测是否因为组件未开启
 	if (!parent.omegaSideConnect) {
 		console.log("开始判断");
@@ -25,13 +25,12 @@ onload = () => {
 				};
 			});
 		});
-
 	}
 	thisVue.menuSelect(0, "1") // 切换至第一个选项卡
 	thisVue.getAllPlayer(); // 尝试获取玩家列表
 	// 每秒钟检测一次连接状态
 	setInterval(() => {
-		thisVue.$data.load = !parent.omegaSideConnect;
+		// thisVue.$data.load = !parent.omegaSideConnect;
 	}, 1000)
 }
 var vue = () => new Vue({
@@ -269,7 +268,8 @@ var vue = () => new Vue({
 					socketFun.getPlayerPlace(vue.playerSelect);
 					(async ()=>{
 						let msg = await socketFun.getNext();
-						vue.playerPlace = "获取到坐标："+msg.data.pos;
+						let pos = msg.data.pos;
+						vue.playerPlace = "获取到坐标：x："+pos[0]+"，y："+pos[1]+"，z："+pos[2];
 					})();
 					break;
 				case '3':

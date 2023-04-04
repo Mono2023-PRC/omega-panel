@@ -13,7 +13,6 @@
 	<body style="user-select: none;">
 		<div id="app">
 			<div id="main">
-				<h1>警告！该页面不可用。</h1>
 				<!-- 文档主体从此处开始 -->
 				<div id="search">
 					<div>
@@ -41,27 +40,50 @@
 						</el-table-column>
 						<el-table-column label="操作">
 							<template slot-scope="scope">
-								 <el-button type="primary" @click="fileInput(scope.row.name,scope.row.src)" plain>导入</el-button>
+								 <el-button type="primary" @click="fileInput(scope.row.name,scope.row.src,scope.row.type)" plain>导入</el-button>
 								 <el-button type="danger" @click="deleteFile(scope.row.name,scope.row.src)" plain>删除</el-button>
 							</template>
 						</el-table-column>
 					</el-table>
 				</div>
-				<div>
-					
+				<div id="openDir">
 					<el-button type="primary" @click="openDir()">打开文件夹</el-button>
 				</div>
-				<el-dialog title="文件导入" :visible.sync="fileInputWindow">
-					<span>导入文件：</span>
-					<span>{{fileSelect.name}}</span>
-					<!-- fb导入 -->
-					<div>
-						
+				<el-dialog title="文件导入" :visible.sync="fileInputWindow" width="65%">
+					<span>文件名:</span>
+					<span class="fileName">{{fileSelect.name}}</span>
+					<div class="xyz">
+						<span>X：</span>
+						<el-input-number v-model="fileSelect.x" label="x"></el-input-number>
+						<span> Y：</span>
+						<el-input-number v-model="fileSelect.y" label="y"></el-input-number>
+						<span> Z：</span>
+						<el-input-number v-model="fileSelect.z" label="z"></el-input-number>
 					</div>
-					<!-- omega导入 -->
-					<div>
-						<span>导入设置：<span>{{loadSpeed}}</span>方块/秒</span>
-					</div>
+					<el-row id="fileInput">
+						<!-- fb导入 -->
+						<el-col :span="11">
+							<div>使用FastBuilder导入</div>
+							<div>
+								<div>&nbsp;</div>
+								<div>自动导入：</div>
+								<el-button type="primary" @click="fbInput">导 入</el-button>
+							</div>
+						</el-col>
+						<!-- 分隔线 -->
+						<el-col :span="2">
+							 <div class="centerColor"></div>
+						</el-col>
+						<!-- omega导入 -->
+						<el-col :span="11">
+							<div>使用Omega导入</div>
+							<div>
+								<div>导入设置：<span>{{loadSpeed}}</span>方块/秒</div>
+								<div>复制导入命令：</div>
+								<el-button type="primary" @click="omgInputCopyCmd">复 制</el-button>
+							</div>
+						</el-col>
+					</el-row>
 				</el-dialog>
 			</div>
 		</div>
